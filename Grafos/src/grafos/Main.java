@@ -34,15 +34,12 @@ public class Main {
 
 
             vert_peso = new StringTokenizer(linha, ": -");
-
             ArrayList<String> aresta =new ArrayList<String>();
             
             while (vert_peso.hasMoreTokens()) {
 
-               // Campo 1
                aresta.add(vert_peso.nextToken());
                vert = new StringTokenizer(linha, "-");
-         
             }
             System.out.println(aresta);
          }
