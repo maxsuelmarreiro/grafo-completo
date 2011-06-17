@@ -28,11 +28,12 @@ public class TesteRooke {
         
 
         g.insereAresta(1, 2, 3);
-        g.insereAresta(4, 2, 1);
+        g.insereAresta(4, 1, 1);
         g.insereAresta(3, 2, 2);
         //g.ImprimeGrafo();
        // g.ImprimeSucessores(1);
-        g.ImprimeAntecessores(2);
+       // g.ImprimeAntecessores(2);
+        g.ImprimeAdjacentes(1);
         g.existeCaminho(1, 2);
 
         System.out.println("oi");

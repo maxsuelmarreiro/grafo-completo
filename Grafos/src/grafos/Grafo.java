@@ -190,4 +190,8 @@ public class Grafo {
             System.out.println("Este grafo não é orientado!");
         }
     }
+    public void ImprimeAdjacentes(int id_vertice){
+        ImprimeAntecessores(id_vertice);
+        ImprimeSucessores(id_vertice);
+    }
 }
