@@ -14,7 +14,7 @@ public class Grafo {
 
     private ArrayList<Vertice> vertices;
     private boolean orientado;
-   ;
+
 
     public Grafo() {
         vertices = new ArrayList<Vertice>();
@@ -207,5 +207,67 @@ public class Grafo {
     public void ImprimeAdjacentes(int id_vertice){
         ImprimeAntecessores(id_vertice);
         ImprimeSucessores(id_vertice);
+    }
+
+    public void CalculaGrau(int idV)
+    {
+        
+        int grau=0;
+        for (Vertice v : vertices)
+        {
+          
+            //procura vert nos adjacentes de v
+            while (v.getAdjacente()!=null)
+            {
+                // se o vertice com id 'idV' é adjacente a v:
+               if(v.getAdjacente().getId()== idV)
+                      grau++;
+            }
+
+            //procura o vertice com id 'idV' e vê quantos adjacentes ele tem
+            if(v.getId()== idV)
+            {
+                //conta os adjacentes à ele
+               while(v.getAdjacente()!=null)
+                     grau++;
+
+            }
+      }
+        System.out.print("O grau é:"+grau);
+       // return grau;
+    }
+
+    public int CalculaGrauSaida (int idV)
+    {
+       int grau=0;
+       for(Vertice v: vertices)
+       {
+           //procura o vertice de id 'idV' no array de vertices
+           if(v.getId()== idV)
+           {
+               //conta os vértices que saem dele
+               while(v.getAdjacente()!=null)
+                   grau++;
+
+               break; // sai do for pq já achou todos
+           }
+       }
+
+       return grau;
+    }
+
+    public int CalculaGrauEntrada (int idV)
+    {
+         int grau=0;
+         for(Vertice v: vertices)
+         {
+             //procura vertice de id 'idV' nos adjacentes de v para contar quantos entram nele
+             while (v.getAdjacente()!=null)
+             {
+                 if(v.getAdjacente().getId()== idV)// vert é adjacente
+                     grau++;
+             }
+         }
+         return grau;
     }
 }
