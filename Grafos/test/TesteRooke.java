@@ -34,10 +34,16 @@ public class TesteRooke {
         //g.ImprimeGrafo();
        // g.ImprimeSucessores(1);
        // g.ImprimeAntecessores(2);
+
+        g.ImprimeAdjacentes(1);
+        g.CalculaGrauEntrada(1);
+        //g.existeCaminho(1, 2);
+
         //g.ImprimeAdjacentes(4);
-        grau=g.CalculaGrau(1);
-        System.out.println(grau);
+
+        g.OrdenaGrau();
         System.out.println("oi");
+
 
     }
 
