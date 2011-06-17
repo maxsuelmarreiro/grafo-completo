@@ -7,6 +7,7 @@ package grafos;
 
 import java.util.ArrayList;
 
+
 /**
  *
  * @author Fran
@@ -31,5 +32,33 @@ public class Grafo {
         this.vertices = vertices;
     }
 
+    public void ImprimeGrafo() {
+        if (orientado) {
+
+
+        }
+        else{
+            System.out.println("0");
+            }
+        for (Vertice vertice : vertices){
+            while (vertice.getAdjacente()!= null){
+                System.out.print(vertice.getId());
+                System.out.print("-");
+                System.out.print(vertice.getAdjacente().getId());
+                System.out.print(":");
+                System.out.print(vertice.getPeso());
+
+
+            }
+            if (vertice.getAdjacente()== null){
+                System.out.print(vertice.getId());
+                System.out.print("-");
+                System.out.print("*");
+                System.out.print(":");
+                System.out.print("0");
+            }
+
+        }
+    }
     
 }
