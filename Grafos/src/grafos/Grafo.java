@@ -74,13 +74,15 @@ public class Grafo {
             for (Vertice vertice : vertices) {
                 if (vertice.getId() == v1) {
                     Vertice v = vertice;
-                    /***********************************/
-                    /*** Pega o ultimo cara da lista ***/
-                    /***********************************/
+                    /*************************************************/
+                    /*** Percorre até achar o ultimo cara da lista ***/
+                    /*************************************************/
                     while(v.getAdjacente() != null){
                         v = v.getAdjacente();
                     }
+                    //Esse "v" é o ultimo cara!
                     if(v.getAdjacente() == null){
+                        //então coloca o v2 depois dele
                         Vertice ver2 = new Vertice();
                         ver2.setId(v2);
                         ver2.setPeso(peso);
