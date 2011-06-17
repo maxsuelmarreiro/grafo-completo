@@ -31,13 +31,20 @@ public class TesteRooke {
         g.insereAresta(1, 2, 3);
         g.insereAresta(4, 1, 1);
         g.insereAresta(3, 4, 2);
+
+
+        g.removeVertice(1);
+
         //g.ImprimeGrafo();
        // g.ImprimeSucessores(1);
        // g.ImprimeAntecessores(2);
 
         g.ImprimeAdjacentes(1);
-        g.CalculaGrauEntrada(1);
-        //g.existeCaminho(1, 2);
+        g.existeAresta(1, 2);
+        g.existeAresta(1, 5);
+        g.existeAresta(1, 4);
+        g.existeAresta(1, 1);
+        g.existeAresta(2, 1);
 
         //g.ImprimeAdjacentes(4);
 
