@@ -131,7 +131,7 @@ public class Grafo {
         }
     }
 
-    public boolean existeCaminho(int v1, int v2) {
+    public boolean existeAresta(int v1, int v2) {
         boolean retorno = false;
         if (verificaVertice(v1) && verificaVertice(v2)){
             /********************************/
@@ -139,11 +139,25 @@ public class Grafo {
             /********************************/
             for (Vertice vertice : vertices){
                 if (vertice.getId() == v1){
-                    Vertice v = vertice;
-                    /*******************************/
-                    /*** Percorre até achar o v2 ***/
-                    /*******************************/
+                    /*****************************************************************/
+                    /*** Se o vertice não tem adjacentes não precisa nem percorrer ***/
+                    /*****************************************************************/
+                    if(vertice.getAdjacente() == null){
+                        break;
+                    }
+
+                    /***********************************************************/
+                    /*** Se tem, começa do segundo e percorre até achar o v2 ***/
+                    /***********************************************************/
+                    Vertice v = vertice.getAdjacente();
                     while (v.getAdjacente() != null) {
+                        if(v.getId() == v2){
+                            retorno = true;
+                            break;
+                        }
+                        v = v.getAdjacente();
+                    }
+                    if (v.getAdjacente() == null) {
                         if(v.getId() == v2){
                             retorno = true;
                             break;
