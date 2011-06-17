@@ -158,10 +158,18 @@ public class Grafo {
     }
 
     public void ImprimeSucessores(int id_vertice){
-        for (Vertice v : vertices){
-            if (v.getId() == id_vertice){
-                System.out.println(v.getAdjacente().getId());
+        if(orientado){
+            for (Vertice v : vertices){
+                if (v.getId() == id_vertice){
+                    while(v.getAdjacente() != null){
+                        System.out.println(v.getAdjacente().getId());
+                        v=v.getAdjacente();
+                    }
+                }
             }
+        }
+        else{
+            System.out.println("Este grafo não é orientado!");
         }
     }
 }
