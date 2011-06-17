@@ -5,6 +5,7 @@
 package grafos;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  *
@@ -205,11 +206,48 @@ public class Grafo {
         }
     }
     public void ImprimeAdjacentes(int id_vertice){
-        ImprimeAntecessores(id_vertice);
-        ImprimeSucessores(id_vertice);
+        //ImprimeAntecessores(id_vertice);
+        //ImprimeSucessores(id_vertice);
+        for (Vertice v : vertices){
+                if (v.getId() == id_vertice){
+                    while(v.getAdjacente() != null){
+                        System.out.println(v.getAdjacente().getId());
+                        v=v.getAdjacente();
+                    }
+                }
+            }
+
+        for (Vertice v : vertices){
+
+                    while(v.getAdjacente() != null){
+                        if (v.getAdjacente().getId() == id_vertice){
+                        System.out.println(v.getId());
+                        }
+                        v=v.getAdjacente();
+                    }
+
+            }
     }
 
-    public void CalculaGrau(int idV)
+    public void OrdenaGrau(){
+
+        for (int i=vertices.size();i>1;i--){
+            for (int j=1;j<i;j++){
+                if (CalculaGrau(vertices.get(j-1).getId())>CalculaGrau(vertices.get(j).getId())){
+
+                    Collections.swap(vertices, j, j-1);
+                }
+            }
+
+        }
+
+        for (Vertice v : vertices){
+            System.out.println(v.getId());
+        }
+    }
+
+
+    public int CalculaGrau(int idV)
     {
         
         int grau=0;
@@ -220,21 +258,25 @@ public class Grafo {
             while (v.getAdjacente()!=null)
             {
                 // se o vertice com id 'idV' é adjacente a v:
-               if(v.getAdjacente().getId()== idV)
+               if(v.getAdjacente().getId()== idV){
                       grau++;
+                }
+               v=v.getAdjacente();
+
             }
 
             //procura o vertice com id 'idV' e vê quantos adjacentes ele tem
             if(v.getId()== idV)
             {
                 //conta os adjacentes à ele
-               while(v.getAdjacente()!=null)
+               while(v.getAdjacente()!=null){
                      grau++;
-
+                     v=v.getAdjacente();
+                }
             }
       }
         System.out.print("O grau é:"+grau);
-       // return grau;
+        return grau;
     }
 
     public int CalculaGrauSaida (int idV)
@@ -270,4 +312,5 @@ public class Grafo {
          }
          return grau;
     }
+
 }

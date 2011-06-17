@@ -17,8 +17,9 @@ public class TesteRooke {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        int grau=0;
         Grafo g = new Grafo();
-        g.setOrientado(true);
+        g.setOrientado(false);
         g.insereVertice(1);
         g.insereVertice(1);
         g.insereVertice(2);
@@ -29,13 +30,13 @@ public class TesteRooke {
 
         g.insereAresta(1, 2, 3);
         g.insereAresta(4, 1, 1);
-        g.insereAresta(3, 2, 2);
+        g.insereAresta(3, 4, 2);
         //g.ImprimeGrafo();
        // g.ImprimeSucessores(1);
        // g.ImprimeAntecessores(2);
-        g.ImprimeAdjacentes(1);
-        g.existeCaminho(1, 2);
-
+        //g.ImprimeAdjacentes(4);
+        grau=g.CalculaGrau(1);
+        System.out.println(grau);
         System.out.println("oi");
 
     }
