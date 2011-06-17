@@ -106,7 +106,7 @@ public class Grafo {
             Vertice v = vertice;
             
             while (v.getAdjacente()!= null){
-                System.out.print(v.getId());
+                System.out.print(vertice.getId());
                 System.out.print("-");
                 System.out.print(v.getAdjacente().getId());
                 System.out.print(":");
@@ -115,7 +115,7 @@ public class Grafo {
 
             }
             if (v.getAdjacente()== null){
-                System.out.print(v.getId());
+                System.out.print(vertice.getId());
                 System.out.print("-");
                 System.out.print("*");
                 System.out.print(":");

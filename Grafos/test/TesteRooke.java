@@ -31,6 +31,9 @@ public class TesteRooke {
         g.insereAresta(1, 4, 2);
         g.ImprimeGrafo();
 
+
+        g.existeCaminho(1, 2);
+
         System.out.println("oi");
 
     }
