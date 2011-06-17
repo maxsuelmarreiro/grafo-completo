@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package grafos;
 
 import java.util.ArrayList;
@@ -13,8 +12,13 @@ import java.util.ArrayList;
  * @author Fran
  */
 public class Grafo {
+
     private ArrayList<Vertice> vertices;
     private boolean orientado;
+
+    public Grafo() {
+        vertices = new ArrayList<Vertice>();
+    }
 
     public boolean isOrientado() {
         return orientado;
@@ -30,6 +34,56 @@ public class Grafo {
 
     public void setVertices(ArrayList<Vertice> vertices) {
         this.vertices = vertices;
+    }
+
+
+    public boolean verificaVertice(int v) {
+        /**********************************************/
+        /*** Verifica se o vertice já está no grafo ***/
+        /**********************************************/
+        boolean jaesta = false;
+        for (Vertice vertice : vertices) {
+            if (vertice.getId() == v) {
+                jaesta = true;
+                break;
+            }
+        }
+
+        return jaesta;
+    }
+
+    public void insereVertice(int v) {
+
+        /*************************************/
+        /*** Se não tem o vertice no grafo ***/
+        /*************************************/
+        if (!verificaVertice(v)) {
+            //cria um objeto vertice e adiciona ele no grafo
+            Vertice ver = new Vertice();
+            ver.setId(v);
+            vertices.add(ver);
+        }
+
+    }
+
+    public void insereAresta(int v1, int v2, int peso) {
+        if (verificaVertice(v1) && verificaVertice(v2)) {
+            /********************************/
+            /*** Busca o v1 no array list ***/
+            /********************************/
+            for (Vertice vertice : vertices) {
+                if (vertice.getId() == v1) {
+                    
+                    while(){
+
+                    }
+                    
+
+
+                    break;
+                }
+            }
+        }
     }
 
     public void ImprimeGrafo() {
@@ -60,4 +114,5 @@ public class Grafo {
         }
     }
     
+
 }
