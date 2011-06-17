@@ -355,7 +355,6 @@ public class Grafo {
                         }
                         v=v.getAdjacente();
                     }
-
             }
     }
 
@@ -402,7 +401,7 @@ public class Grafo {
                   v = v.getAdjacente();
              }
        }
-      
+       System.out.print("O grau é:" + grau);
          return grau;
     }
 
@@ -444,6 +443,58 @@ public class Grafo {
          }
          System.out.print("O grau é: "+grau);
          return grau;
+    }
+
+    public boolean existeCaminho (Vertice v1, Vertice v2, ArrayList<Integer> visitados)
+    {
+
+        boolean existe=false;
+
+        boolean jafoi=false;
+
+        //adiciona assim que entra
+        visitados.add(v1.getId());
+      
+        for(Vertice vt: vertices)
+        {
+           
+            //Para achar v1
+            if(vt.getId()==v1.getId())//ACHEI V1
+            {
+
+                //procurar se v2 é adjacente de vt que é igual a v1
+                while(vt.getAdjacente()!= null)
+                {
+
+                    //v2 é adjacente de v1
+                    if(vt.getAdjacente().getId()==v2.getId())
+                    {
+                        //faz alguma coisa
+                        existe=true;                        
+                        break;
+                    }
+                    //se nao é igual à v2
+                    else{
+                        for(int i=0;i<visitados.size();i++)//verifica se já foi visitado
+                        {
+                            if(visitados.get(i)== vt.getId()){//já foi visitado
+                                jafoi=true;
+                                break;
+                            }
+                        }
+                        if(jafoi==false)// ainda não foi visitado
+                        {
+                             visitados.add(v1.getAdjacente().getId());// adiciona o vertice adjacente na lista de visitados
+                             //faz a recursão com ele
+                             existeCaminho (vt.getAdjacente(),v2,visitados);
+                        }
+                        
+                    }
+                    vt=vt.getAdjacente();
+                }
+            }
+      }
+      return existe;
     }
 
 }

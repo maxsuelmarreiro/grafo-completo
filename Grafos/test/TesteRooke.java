@@ -1,5 +1,6 @@
 
 import grafos.Grafo;
+import java.util.ArrayList;
 
 /*
  * To change this template, choose Tools | Templates
@@ -26,11 +27,18 @@ public class TesteRooke {
         g.insereVertice(3);
         g.insereVertice(3);
         g.insereVertice(4);
-        
+  
+        g.insereAresta(2, 1, 3);
+        g.insereAresta(1, 4, 1);
+        g.insereAresta(4, 3, 2);
+             
 
-        g.insereAresta(1, 2, 3);
-        g.insereAresta(4, 1, 1);
-        g.insereAresta(3, 4, 2);
+        System.out.print("g.getVertices().get(1)"+g.getVertices().get(1).getId()+"\n");
+        System.out.print("g.getVertices().get(2)"+g.getVertices().get(2).getId()+"\n");
+        System.out.print("g.getVertices().get(3)"+g.getVertices().get(3).getId()+"\n");
+        System.out.print("g.getVertices().get(3)"+g.getVertices().get(4).getId()+"\n");
+
+
 
 
         //g.removeVertice(1);
@@ -41,17 +49,19 @@ public class TesteRooke {
        // g.ImprimeSucessores(1);
        // g.ImprimeAntecessores(2);
 
-        g.ImprimeAdjacentes(1);
-        g.existeAresta(1, 2);
-        g.existeAresta(1, 5);
-        g.existeAresta(1, 4);
-        g.existeAresta(1, 1);
-        g.existeAresta(2, 1);
+       // g.ImprimeAdjacentes(1);
+       // g.CalculaGrau(1);
+        ArrayList<Integer> todos = new ArrayList<Integer>();
+        todos.add(g.getVertices().get(1).getId());
+       boolean caminho = g.existeCaminho(g.getVertices().get(0), g.getVertices().get(4),todos);
+        System.out.print("Tem caminho?" + caminho);
+      
+        //g.existeCaminho(1, 2);
 
         //g.ImprimeAdjacentes(4);
 
-        g.OrdenaGrau();
-        System.out.println("oi");
+       // g.OrdenaGrau();
+  //      System.out.println("oi");
 
 
     }
