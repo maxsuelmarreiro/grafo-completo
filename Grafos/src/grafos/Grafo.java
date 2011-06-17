@@ -77,10 +77,14 @@ public class Grafo {
                     /*************************************************/
                     /*** Percorre até achar o ultimo cara da lista ***/
                     /*************************************************/
+
                     while (v.getAdjacente() != null) {
+
                         v = v.getAdjacente();
 
+
                     }
+
                     //Esse "v" é o ultimo cara!
                     if (v.getAdjacente() == null) {
                         //então coloca o v2 depois dele
@@ -110,7 +114,9 @@ public class Grafo {
                 System.out.print("-");
                 System.out.print(v.getAdjacente().getId());
                 System.out.print(":");
+
                 System.out.println(v.getAdjacente().getPeso());
+
                 v = v.getAdjacente();
 
             }
@@ -149,5 +155,13 @@ public class Grafo {
             }
         }
         return retorno;
+    }
+
+    public void ImprimeSucessores(int id_vertice){
+        for (Vertice v : vertices){
+            if (v.getId() == id_vertice){
+                System.out.println(v.getAdjacente().getId());
+            }
+        }
     }
 }
