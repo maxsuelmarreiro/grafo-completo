@@ -370,10 +370,10 @@ public class Grafo {
 
         }
 
-        for (Vertice v : vertices){
-            System.out.println(v.getId());
-           
-        }
+//        for (Vertice v : vertices){
+//            System.out.println(v.getId());
+//
+//        }
     }
 
     public int CalculaGrau(int idV)
@@ -445,6 +445,39 @@ public class Grafo {
          return grau;
     }
 
+
+    public void OrdenaPesoArestas(){
+        for (int i=arestas.size();i>1;i--){
+            for (int j=1;j<i;j++){
+                if (arestas.get(j-1).getPeso()>arestas.get(j).getPeso()){
+
+                    Collections.swap(arestas, j, j-1);
+                }
+            }
+
+        }
+
+//        for (Aresta a : arestas){
+//            System.out.println(a.getV1());
+//            System.out.println(a.getPeso());
+//            System.out.println(a.getV2());
+//
+//        }
+
+    }
+
+    public void BuscaProfundidade(Vertice v,ArrayList<Integer> visitados){
+        while (v.getAdjacente()!= null){
+            for(Integer visitado: visitados){
+                if (!(visitado==v.getAdjacente().getId())){
+                    visitados.add(v.getAdjacente().getId());
+                    BuscaProfundidade(v.getAdjacente(),visitados);
+                }
+            }
+        }
+        
+    }
+
     public boolean existeCaminho (Vertice v1, Vertice v2)
     {
         ArrayList<Integer> visitados = new ArrayList<Integer>();
@@ -504,5 +537,6 @@ public class Grafo {
       }
       return existe;
     }
+
 
 }
