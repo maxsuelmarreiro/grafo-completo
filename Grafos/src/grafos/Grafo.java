@@ -73,13 +73,19 @@ public class Grafo {
             /********************************/
             for (Vertice vertice : vertices) {
                 if (vertice.getId() == v1) {
-                    
-                    while(){
-
+                    Vertice v = vertice;
+                    /***********************************/
+                    /*** Pega o ultimo cara da lista ***/
+                    /***********************************/
+                    while(v.getAdjacente() != null){
+                        v = v.getAdjacente();
                     }
-                    
-
-
+                    if(v.getAdjacente() == null){
+                        Vertice ver2 = new Vertice();
+                        ver2.setId(v2);
+                        ver2.setPeso(peso);
+                        v.setAdjacente(ver2);
+                    }
                     break;
                 }
             }

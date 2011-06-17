@@ -25,6 +25,10 @@ public class TesteRooke {
         g.insereVertice(3);
         g.insereVertice(4);
 
+        g.insereAresta(1, 2, 3);
+        g.insereAresta(1, 3, 1);
+        g.insereAresta(1, 4, 2);
+
         System.out.println("oi");
     }
 
