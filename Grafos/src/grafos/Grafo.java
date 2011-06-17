@@ -445,7 +445,15 @@ public class Grafo {
          return grau;
     }
 
-    public boolean existeCaminho (Vertice v1, Vertice v2, ArrayList<Integer> visitados)
+    public boolean existeCaminho (Vertice v1, Vertice v2)
+    {
+        ArrayList<Integer> visitados = new ArrayList<Integer>();
+        visitados.add(v1.getId());
+
+        return existeCaminho(v1,v2,visitados);
+    }
+
+    private boolean existeCaminho (Vertice v1, Vertice v2, ArrayList<Integer> visitados)
     {
 
         boolean existe=false;
