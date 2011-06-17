@@ -172,4 +172,22 @@ public class Grafo {
             System.out.println("Este grafo não é orientado!");
         }
     }
+
+    public void ImprimeAntecessores(int id_vertice){
+         if(orientado){
+            for (Vertice v : vertices){
+
+                    while(v.getAdjacente() != null){
+                        if (v.getAdjacente().getId() == id_vertice){
+                        System.out.println(v.getId());
+                        }
+                        v=v.getAdjacente();
+                    }
+
+            }
+        }
+        else{
+            System.out.println("Este grafo não é orientado!");
+        }
+    }
 }
