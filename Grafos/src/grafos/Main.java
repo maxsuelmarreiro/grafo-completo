@@ -28,24 +28,25 @@ public class Main {
          BufferedReader leitor = new BufferedReader(reader);
          StringTokenizer vert_peso = null;
          StringTokenizer vert = null;
-
+         ArrayList<String> aresta =new ArrayList<String>();
 
          while ((linha = leitor.readLine()) != null) {
 
 
             vert_peso = new StringTokenizer(linha, ": -");
-            ArrayList<String> aresta =new ArrayList<String>();
+            
             
             while (vert_peso.hasMoreTokens()) {
 
                aresta.add(vert_peso.nextToken());
                vert = new StringTokenizer(linha, "-");
             }
-            System.out.println(aresta);
+            //
+
          }
          leitor.close();
          reader.close();
-
+         System.out.println(aresta);
       } catch (Exception e) {
          e.printStackTrace();
       }
