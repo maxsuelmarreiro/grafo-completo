@@ -6,7 +6,6 @@ package grafos;
 
 import java.util.ArrayList;
 
-
 /**
  *
  * @author Fran
@@ -36,7 +35,6 @@ public class Grafo {
     public void setVertices(ArrayList<Vertice> vertices) {
         this.vertices = vertices;
     }
-
 
     public boolean verificaVertice(int v) {
         /**********************************************/
@@ -79,12 +77,12 @@ public class Grafo {
                     /*************************************************/
                     /*** Percorre até achar o ultimo cara da lista ***/
                     /*************************************************/
-                    while(v.getAdjacente() != null){
+                    while (v.getAdjacente() != null) {
                         v = v.getAdjacente();
 
-                   // }
+                    }
                     //Esse "v" é o ultimo cara!
-                    if(v.getAdjacente() == null){
+                    if (v.getAdjacente() == null) {
                         //então coloca o v2 depois dele
                         Vertice ver2 = new Vertice();
                         ver2.setId(v2);
@@ -96,14 +94,13 @@ public class Grafo {
             }
         }
     }
-   }
+   
     public void ImprimeGrafo() {
         if (orientado) {
             System.out.println("1");
-        }
-        else{
+        } else {
             System.out.println("0");
-            }
+        }
          
         for (Vertice vertice : vertices){
             Vertice v = vertice;
@@ -113,7 +110,7 @@ public class Grafo {
                 System.out.print("-");
                 System.out.print(v.getAdjacente().getId());
                 System.out.print(":");
-                System.out.println(v.getPeso());
+                System.out.println(v.getAdjacente().getPeso());
                 v = v.getAdjacente();
 
             }
@@ -127,6 +124,30 @@ public class Grafo {
 
         }
     }
-    
 
+    public boolean existeCaminho(int v1, int v2) {
+        boolean retorno = false;
+        if (verificaVertice(v1) && verificaVertice(v2)){
+            /********************************/
+            /*** Busca o v1 no array list ***/
+            /********************************/
+            for (Vertice vertice : vertices){
+                if (vertice.getId() == v1){
+                    Vertice v = vertice;
+                    /*******************************/
+                    /*** Percorre até achar o v2 ***/
+                    /*******************************/
+                    while (v.getAdjacente() != null) {
+                        if(v.getId() == v2){
+                            retorno = true;
+                            break;
+                        }
+                        v = v.getAdjacente();
+                    }
+                    break;
+                }
+            }
+        }
+        return retorno;
+    }
 }
