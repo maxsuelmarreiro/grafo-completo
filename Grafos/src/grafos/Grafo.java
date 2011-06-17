@@ -186,48 +186,48 @@ public class Grafo {
     }
 
     public void removeAresta(int v1, int v2, int peso) {
-//        if (verificaVertice(v1) && verificaVertice(v2) && verificaAresta(v1, v2, peso)) {
-//            for (Vertice vertice : vertices) {
-//                /******************************************/
-//                /*** Se for o cara que eu to procurando ***/
-//                /******************************************/
-//                if (vertice.getId() == v1) {
-//                    Vertice ver = vertice;
-//                    //enquanto não for o ultimo
-//                    while (ver.getAdjacente() != null) {
-//                        //se o próximo é o vertice procurado
-//                        if (ver.getAdjacente().getId() == v) {
-//                            //então pego o adjacente do "proximo" e coloco ele no lugar do "proximo"
-//                            ver.setAdjacente(ver.getAdjacente().getAdjacente());
-//                        }
-//                        /*****************************************************************************************/
-//                        /* usado para o caso de ter removido o ultimo elemento, logo o adjacente seria null    ***/
-//                        /* e consequentimente o "ver" receberia null e daria erro na proxima iteração do while ***/
-//                        /*****************************************************************************************/
-//                        if (ver.getAdjacente() != null) {
-//                            ver = ver.getAdjacente();
-//                        }
-//                    }
-//                    if (ver.getAdjacente() == null) {
-//                        if (ver.getId() == v1) {
-//                            ver = null;
-//                        }
-//                    }
-//                    break;
-//                }
-//            }
-//        }
-//
-//        /****************************************************/
-//        /*** Apaga todas as arestas que tem o vertice "v" ***/
-//        /****************************************************/
-//        for (int i = 0; i < arestas.size(); i++) {
-//            Aresta aresta = arestas.get(i);
-//            if (aresta.getV1().getId() == v || aresta.getV2().getId() == v) {
-//                arestas.remove(i);
-//                i--;
-//            }
-//        }
+        if (verificaVertice(v1) && verificaVertice(v2) && verificaAresta(v1, v2, peso)) {
+            for (Vertice vertice : vertices) {
+                /******************************************/
+                /*** Se for o cara que eu to procurando ***/
+                /******************************************/
+                if (vertice.getId() == v1) {
+                    Vertice ver = vertice;
+                    //enquanto não for o ultimo
+                    while (ver.getAdjacente() != null) {
+                        //se o próximo é o vertice procurado
+                        if (ver.getAdjacente().getId() == v2 && ver.getAdjacente().getPeso() == peso){
+                            //então pego o adjacente do "proximo" e coloco ele no lugar do "proximo"
+                            ver.setAdjacente(ver.getAdjacente().getAdjacente());
+                        }
+                        /*****************************************************************************************/
+                        /* usado para o caso de ter removido o ultimo elemento, logo o adjacente seria null    ***/
+                        /* e consequentimente o "ver" receberia null e daria erro na proxima iteração do while ***/
+                        /*****************************************************************************************/
+                        if (ver.getAdjacente() != null) {
+                            ver = ver.getAdjacente();
+                        }
+                    }
+                    if (ver.getAdjacente() == null) {
+                        if (ver.getId() == v2 && ver.getPeso() == peso) {
+                            ver = null;
+                        }
+                    }
+                    break;
+                }
+            }
+        }
+
+        /****************************************************/
+        /*** Apaga todas as arestas que tem o vertice "v" ***/
+        /****************************************************/
+        for (int i = 0; i < arestas.size(); i++) {
+            Aresta aresta = arestas.get(i);
+            if (aresta.getV1().getId() == v1 && aresta.getV2().getId() == v2 && aresta.getPeso() == peso) {
+                arestas.remove(i);
+                i--;
+            }
+        }
 
     }
 
