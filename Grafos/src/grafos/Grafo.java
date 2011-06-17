@@ -15,6 +15,7 @@ public class Grafo {
 
     private ArrayList<Vertice> vertices;
     private boolean orientado;
+   ;
 
     public Grafo() {
         vertices = new ArrayList<Vertice>();
@@ -73,13 +74,15 @@ public class Grafo {
             /********************************/
             for (Vertice vertice : vertices) {
                 if (vertice.getId() == v1) {
+
                     Vertice v = vertice;
                     /*************************************************/
                     /*** Percorre até achar o ultimo cara da lista ***/
                     /*************************************************/
                     while(v.getAdjacente() != null){
                         v = v.getAdjacente();
-                    }
+
+                   // }
                     //Esse "v" é o ultimo cara!
                     if(v.getAdjacente() == null){
                         //então coloca o v2 depois dele
@@ -88,12 +91,12 @@ public class Grafo {
                         ver2.setPeso(peso);
                         v.setAdjacente(ver2);
                     }
-                    break;
+                   // break;
                 }
             }
         }
     }
-
+   }
     public void ImprimeGrafo() {
         if (orientado) {
             System.out.println("1");
@@ -101,22 +104,25 @@ public class Grafo {
         else{
             System.out.println("0");
             }
+         
         for (Vertice vertice : vertices){
-            while (vertice.getAdjacente()!= null){
-                System.out.print(vertice.getId());
+            Vertice v = vertice;
+            
+            while (v.getAdjacente()!= null){
+                System.out.print(v.getId());
                 System.out.print("-");
-                System.out.print(vertice.getAdjacente().getId());
+                System.out.print(v.getAdjacente().getId());
                 System.out.print(":");
-                System.out.print(vertice.getPeso());
-
+                System.out.println(v.getPeso());
+                v = v.getAdjacente();
 
             }
-            if (vertice.getAdjacente()== null){
-                System.out.print(vertice.getId());
+            if (v.getAdjacente()== null){
+                System.out.print(v.getId());
                 System.out.print("-");
                 System.out.print("*");
                 System.out.print(":");
-                System.out.print("0");
+                System.out.println("0");
             }
 
         }
