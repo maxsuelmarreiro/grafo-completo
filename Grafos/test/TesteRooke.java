@@ -51,11 +51,8 @@ public class TesteRooke {
 
        // g.ImprimeAdjacentes(1);
        // g.CalculaGrau(1);
-        ArrayList<Integer> todos = new ArrayList<Integer>();
-        todos.add(g.getVertices().get(1).getId());
-       boolean caminho = g.existeCaminho(g.getVertices().get(0), g.getVertices().get(4),todos);
-        System.out.print("Tem caminho?" + caminho);
-      
+     
+     
         //g.existeCaminho(1, 2);
 
         //g.ImprimeAdjacentes(4);
