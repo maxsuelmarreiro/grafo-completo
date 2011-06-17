@@ -33,7 +33,9 @@ public class TesteRooke {
         g.insereAresta(3, 4, 2);
 
 
-        g.removeVertice(1);
+        //g.removeVertice(1);
+
+        g.removeAresta(1, 2, 3);
 
         //g.ImprimeGrafo();
        // g.ImprimeSucessores(1);
