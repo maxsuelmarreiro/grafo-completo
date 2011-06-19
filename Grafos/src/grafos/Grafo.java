@@ -488,55 +488,95 @@ public class Grafo {
 
     private boolean existeCaminho (Vertice v1, Vertice v2, ArrayList<Integer> visitados)
     {
+       boolean existe=false;
 
-        boolean existe=false;
-
-        boolean jafoi=false;
-
-        //adiciona assim que entra
-        visitados.add(v1.getId());
-      
+        boolean jafoi = false;
+    
         for(Vertice vt: vertices)
-        {
-           
+        {           
             //Para achar v1
             if(vt.getId()==v1.getId())//ACHEI V1
             {
-
-                //procurar se v2 é adjacente de vt que é igual a v1
-                while(vt.getAdjacente()!= null)
+              //procurar se v2 é adjacente de vt que é igual a v1
+                while(vt.getAdjacente()!= null && existe!=true)
                 {
-
                     //v2 é adjacente de v1
                     if(vt.getAdjacente().getId()==v2.getId())
                     {
-                        //faz alguma coisa
-                        existe=true;                        
-                        break;
+                      existe=true;
+                      break;
                     }
                     //se nao é igual à v2
                     else{
                         for(int i=0;i<visitados.size();i++)//verifica se já foi visitado
                         {
-                            if(visitados.get(i)== vt.getId()){//já foi visitado
-                                jafoi=true;
+                            
+                            if(visitados.get(i)== vt.getAdjacente().getId()){//já foi visitado
+                               jafoi=true;
                                 break;
                             }
                         }
                         if(jafoi==false)// ainda não foi visitado
                         {
-                             visitados.add(v1.getAdjacente().getId());// adiciona o vertice adjacente na lista de visitados
+                            visitados.add(vt.getAdjacente().getId());// adiciona o vertice adjacente na lista de visitados
                              //faz a recursão com ele
-                             existeCaminho (vt.getAdjacente(),v2,visitados);
+                            existe=existeCaminho (vt.getAdjacente(),v2,visitados);
+                            
                         }
                         
                     }
-                    vt=vt.getAdjacente();
+                     vt = vt.getAdjacente();
                 }
             }
       }
       return existe;
     }
 
+    //imprime todos os vertices que podem ser atingidos por vert
+    public void imprimeFTD(Vertice vert)
+    {
+        boolean atingido=false;
+
+        System.out.print("ftd("+ vert.getId()+"):");
+        //achar vert na estrutura
+        for(Vertice vt: vertices)
+        {
+            if(vt.getId()==vert.getId())//achei
+            {
+                //procura quem vert atinge
+                for(Vertice vrt: vertices)
+                {
+                   
+                    atingido=existeCaminho(vt, vrt);
+                   
+                    if(atingido==true)//vt é parte do fecho transitivo direto de vert
+                    {                        
+                        System.out.print(vrt.getId() + ", ");
+                    }
+                }
+                break;  
+            }
+        }
+    }
+
+    //Imprime todos os vértices que alcança 'vert'
+    public void imprimeFTI(Vertice vert)
+    {
+        boolean atinge;
+
+        System.out.print("fti("+vert.getId()+")");
+        //para cada vértice, verifica se ele alcança vert
+        for(Vertice vt: vertices)
+        {
+
+            atinge= existeCaminho(vt, vert);
+            if(atinge==true)// se tem caminho entre vt e vert, imprime vt
+                System.out.print(vt.getId()+", ");
+
+        }
+
+
+
+    }
 
 }
