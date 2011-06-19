@@ -33,25 +33,28 @@ public class TesteRooke {
 //        g.insereAresta(4, 3, 2);
 //        g.insereAresta(3,1, 7);
 
-        g.insereVertice(1);//0
-        g.insereVertice(2);//1
-        g.insereVertice(3);//2
-        g.insereVertice(4);//3
-        g.insereVertice(5);//4
-        g.insereVertice(6);//5
-        g.insereVertice(7);//6
-        
-        g.insereAresta(1,2,10);
-        g.insereAresta(2,3,11);
-        g.insereAresta(3,6,12);
-        g.insereAresta(6,3,13);
-        g.insereAresta(2,5,14);
-        g.insereAresta(4,1,15);
-        g.insereAresta(5,4,16);
-        g.insereAresta(5,6,17);
-        g.insereAresta(7,6,18);
-        g.insereAresta(7,4,19);
-        g.insereAresta(7,5,20);
+//        g.insereVertice(1);//0
+//        g.insereVertice(2);//1
+//        g.insereVertice(3);//2
+//        g.insereVertice(4);//3
+//        g.insereVertice(5);//4
+//        g.insereVertice(6);//5
+//        g.insereVertice(7);//6
+//
+//        g.insereAresta(1,2,10);
+//        g.insereAresta(2,3,11);
+//        g.insereAresta(3,6,12);
+//        g.insereAresta(6,3,13);
+//        g.insereAresta(2,5,14);
+//        g.insereAresta(4,1,15);
+//        g.insereAresta(5,4,16);
+//        g.insereAresta(5,6,17);
+//        g.insereAresta(7,6,18);
+//        g.insereAresta(7,4,19);
+//        g.insereAresta(7,5,20);
+
+
+
         
 //        System.out.print("Estou imprimindo o FTD de: " + g.getVertices().get(4).getId()+"\n");
 //        g.imprimeFTD(g.getVertices().get(4));
@@ -103,8 +106,24 @@ public class TesteRooke {
       
      //   System.out.println("oi");
 
-        g.imprimeFTD(g.getVertices().get(6));
-        g.imprimeFTI(g.getVertices().get(6));
+//        g.imprimeFTD(g.getVertices().get(6));
+//        g.imprimeFTI(g.getVertices().get(6));
+
+           g.insereVertice(1);//0
+           g.insereVertice(2);//1
+           g.insereVertice(3);//2
+           g.insereVertice(4);//3
+           g.insereVertice(5);//4
+
+           g.insereAresta(1,2,1);
+           g.insereAresta(1,5,1);
+           g.insereAresta(2,3,1);
+           g.insereAresta(2,4,1);
+           g.insereAresta(2,5,1);
+           g.insereAresta(3,4,1);
+           g.insereAresta(4,5,1);
+
+           g.Coloracao(g);
 
     }
 

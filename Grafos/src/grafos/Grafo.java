@@ -358,7 +358,8 @@ public class Grafo {
             }
     }
 
-    public void OrdenaGrau(){
+    //mudei o retorno da funçaõ porque preciso de um vetor ordenado por grau para o algoritmo de coloraçao!!
+    public ArrayList<Vertice> OrdenaGrau(){
 
         for (int i=vertices.size();i>1;i--){
             for (int j=1;j<i;j++){
@@ -370,6 +371,7 @@ public class Grafo {
 
         }
 
+        return vertices;
 //        for (Vertice v : vertices){
 //            System.out.println(v.getId());
 //
@@ -401,7 +403,7 @@ public class Grafo {
                   v = v.getAdjacente();
              }
        }
-       System.out.print("O grau é:" + grau);
+       
          return grau;
     }
 
@@ -574,9 +576,85 @@ public class Grafo {
                 System.out.print(vt.getId()+", ");
 
         }
-
-
-
     }
 
+    public ArrayList<Vertice> Adjacentes(int id_vertice) {
+
+        ArrayList<Vertice> adj = new ArrayList<Vertice>();
+        for (Vertice v : vertices){
+                if (v.getId() == id_vertice){
+                    while(v.getAdjacente() != null){
+                        adj.add(v.getAdjacente());
+                        v=v.getAdjacente();
+                    }
+                }
+            }
+
+        for (Vertice v : vertices){
+
+                    while(v.getAdjacente() != null){
+                        if (v.getAdjacente().getId() == id_vertice){
+                            adj.add(v);
+                        }
+                        v=v.getAdjacente();
+                    }
+            }
+
+        return adj;
+    }
+
+    public void Coloracao(Grafo gr)
+    {
+
+       boolean temCor=true;
+
+       gr.vertices=OrdenaGrau(); //ordena os vertices do grafo pelo seu grau, em ordem crescente.
+
+       int j = gr.getVertices().size()-1;
+
+       ArrayList<Vertice> adjacentes = new ArrayList<Vertice>();
+
+       ArrayList<Vertice>colorido = new ArrayList<Vertice>();//grafo com os vertices em ordem descrescente de grau
+       while(j>=0)
+       {
+           colorido.add(gr.getVertices().get(j));
+           j--;
+       }
+
+       //para colorir o grafo, primeiro colorimos o vertice de maior grau
+       colorido.get(0).cor=1;
+
+       Vertice vAtual;
+       int corAtual=1;
+
+       //andando nos vertices
+       for(int i=1;i<colorido.size();i++)// PARA V DE 2 ATÉ N
+       {
+           adjacentes = gr.Adjacentes(i);
+           vAtual=colorido.get(i);
+           //PARA K DE 1 ATE C
+           for(int cor=1; cor<=corAtual;cor++) //andando nas cores para ver qual pode ser usada pelo vertice em questao
+           {
+              //anda nos adjacentes ao vertice da posição 'i' e ve a cor dos adjacentes dele
+              for(Vertice adj: adjacentes)
+              {
+                 //se o adjacente de 4 tem cor igual a atual, entao 4 nao pode ter essa cor
+                  if(adj.cor==cor)
+                       temCor=false; break;
+              }
+             if(temCor==true)//o vertice nao tem nenhum adjacente com a corAtual
+               {
+                  colorido.get(i).cor = cor;
+               }
+          }
+          if(temCor==false) {// a cor do vertice nao pode ser nenhuma das que já tem no vetor, entao tem que colocar uma nova cor
+              corAtual++;
+              colorido.get(i).cor=corAtual;
+            }
+       }
+
+       for(int x=0;x<colorido.size();x++){
+        System.out.print("Vértice:"+colorido.get(x).getId()+","+"Cor:"+colorido.get(x).cor+"\n");}
+
+    }
 }
