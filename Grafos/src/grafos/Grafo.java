@@ -544,6 +544,13 @@ public class Grafo {
         j++;
         
     }
+    public void ImprimeMatrizes(){
+        System.out.println("Matriz de Incidência:");
+        ImprimeMatrizdeIncidencia();
+        System.out.println("");
+        System.out.println("Matriz de Adjacência:");
+        ImprimeMatrizdeAdjacencia();
+    }
 
     public void ImprimeMatrizdeIncidencia(){
         int [][] matriz = new int [getVertices().size()+1][getArestas().size()+1];
