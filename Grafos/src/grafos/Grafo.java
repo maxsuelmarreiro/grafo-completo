@@ -303,12 +303,14 @@ public class Grafo {
         return retorno;
     }
 
-    public void ImprimeSucessores(int id_vertice) {
+    public ArrayList<Integer> ImprimeSucessores(int id_vertice) {
+         ArrayList<Integer> adjacentes = new ArrayList<Integer>();
         if (orientado) {
             for (Vertice v : vertices) {
                 if (v.getId() == id_vertice) {
                     while (v.getAdjacente() != null) {
-                        System.out.println(v.getAdjacente().getId());
+                        adjacentes.add(v.getAdjacente().getId());
+                        //System.out.println(v.getAdjacente().getId());
                         v = v.getAdjacente();
                     }
                 }
@@ -316,15 +318,18 @@ public class Grafo {
         } else {
             System.out.println("Este grafo não é orientado!");
         }
+         return adjacentes;
     }
 
-    public void ImprimeAntecessores(int id_vertice) {
+    public ArrayList<Integer> ImprimeAntecessores(int id_vertice) {
+        ArrayList<Integer> adjacentes = new ArrayList<Integer>();
         if (orientado) {
             for (Vertice v : vertices) {
 
                 while (v.getAdjacente() != null) {
                     if (v.getAdjacente().getId() == id_vertice) {
-                        System.out.println(v.getId());
+                         adjacentes.add(v.getId());
+                       // System.out.println(v.getId());
                     }
                     v = v.getAdjacente();
                 }
@@ -333,6 +338,7 @@ public class Grafo {
         } else {
             System.out.println("Este grafo não é orientado!");
         }
+        return adjacentes;
     }
 
     public ArrayList<Integer> ImprimeAdjacentes(int id_vertice) {
@@ -539,6 +545,109 @@ public class Grafo {
         
     }
 
+    public void ImprimeMatrizdeIncidencia(){
+        int [][] matriz = new int [getVertices().size()+1][getArestas().size()+1];
+        if(orientado){
+             for(int i=0;i<getVertices().size();i++){
+                 matriz[i+1][0]=getVertices().get(i).getId();
+             }
+             for(int i=0;i<getArestas().size();i++){
+                 matriz[0][i+1]=getArestas().get(i).getPeso();
+
+             }
+            for (int i = 0; i < getVertices().size(); i++){
+               for (int j = 0; j < getArestas().size(); j++){
+                   if(matriz[i+1][0]==getArestas().get(j).getV1().getId()){
+                     matriz[i+1][j+1]=1;
+                 }
+                 if(matriz[i+1][0]==getArestas().get(j).getV2().getId()){
+                     matriz[i+1][j+1]=-1;
+                 }
+               }
+               
+           }
+           for (int i = 0; i < getVertices().size()+1; i++){
+               for (int j = 0; j < getArestas().size()+1; j++){
+                   System.out.print(matriz[i][j]+" ");
+               }
+                System.out.println("");
+           }
+
+        }
+        if(!orientado){
+            for(int i=0;i<getVertices().size();i++){
+                 matriz[i+1][0]=getVertices().get(i).getId();
+             }
+             for(int i=0;i<getArestas().size();i++){
+                 matriz[0][i+1]=getArestas().get(i).getPeso();
+
+             }
+            for (int i = 0; i < getVertices().size(); i++){
+               for (int j = 0; j < getArestas().size(); j++){
+                   if(matriz[i+1][0]==getArestas().get(j).getV1().getId() || matriz[i+1][0]==getArestas().get(j).getV2().getId()){
+                     matriz[i+1][j+1]=1;
+                 }
+                 
+               }
+
+           }
+           for (int i = 0; i < getVertices().size()+1; i++){
+               for (int j = 0; j < getArestas().size()+1; j++){
+                   System.out.print(matriz[i][j]+" ");
+               }
+                System.out.println("");
+           }
+        }
+    }
+
+    public void ImprimeMatrizdeAdjacencia(){
+         int [][] matriz = new int [getVertices().size()+1][getVertices().size()+1];
+         ArrayList<Integer> adjacentes = new ArrayList<Integer>();
+          if(orientado){
+             for(int i=0;i<getVertices().size();i++){
+                 matriz[i+1][0]=getVertices().get(i).getId();
+                 matriz[0][i+1]=getVertices().get(i).getId();
+             }
+         for (int i = 0; i < getVertices().size(); i++){
+             adjacentes = ImprimeSucessores(getVertices().get(i).getId());
+               for (int j = 0; j < getVertices().size(); j++){
+                 for(Integer adjacente:adjacentes){
+                     if(getVertices().get(j).getId()==adjacente){
+                         matriz[i+1][j+1]=1;
+                     }
+                 }
+               }
+           }
+         for (int i = 0; i < getVertices().size()+1; i++){
+               for (int j = 0; j < getVertices().size()+1; j++){
+                   System.out.print(matriz[i][j]+" ");
+               }
+                System.out.println("");
+           }
+        }
+         if(!orientado){
+             for(int i=0;i<getVertices().size();i++){
+                 matriz[i+1][0]=getVertices().get(i).getId();
+                 matriz[0][i+1]=getVertices().get(i).getId();
+             }
+         for (int i = 0; i < getVertices().size(); i++){
+             adjacentes = ImprimeAdjacentes(getVertices().get(i).getId());
+               for (int j = 0; j < getVertices().size(); j++){
+                 for(Integer adjacente:adjacentes){
+                     if(getVertices().get(j).getId()==adjacente){
+                         matriz[i+1][j+1]=1;
+                     }
+                 }
+               }
+           }
+         for (int i = 0; i < getVertices().size()+1; i++){
+               for (int j = 0; j < getVertices().size()+1; j++){
+                   System.out.print(matriz[i][j]+" ");
+               }
+                System.out.println("");
+           }
+         }
+    }
 
     public boolean existeCaminho (Vertice v1, Vertice v2)
     {

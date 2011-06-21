@@ -10,6 +10,7 @@ package grafos;
  * @author rooke
  */
 public class Aresta {
+
     private Vertice v1;
     private Vertice v2;
     private int peso;
@@ -37,6 +38,8 @@ public class Aresta {
     public void setV2(Vertice v2) {
         this.v2 = v2;
     }
+
+
 
     
 }
