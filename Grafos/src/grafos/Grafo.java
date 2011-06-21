@@ -335,13 +335,16 @@ public class Grafo {
         }
     }
 
-    public void ImprimeAdjacentes(int id_vertice) {
+    public ArrayList<Integer> ImprimeAdjacentes(int id_vertice) {
         //ImprimeAntecessores(id_vertice);
         //ImprimeSucessores(id_vertice);
+         ArrayList<Integer> adjacentes = new ArrayList<Integer>();
+
         for (Vertice v : vertices){
                 if (v.getId() == id_vertice){
                     while(v.getAdjacente() != null){
-                        System.out.println(v.getAdjacente().getId());
+                        //System.out.println(v.getAdjacente().getId());
+                        adjacentes.add(v.getAdjacente().getId());
                         v=v.getAdjacente();
                     }
                 }
@@ -351,11 +354,13 @@ public class Grafo {
 
                     while(v.getAdjacente() != null){
                         if (v.getAdjacente().getId() == id_vertice){
-                        System.out.println(v.getId());
+                       // System.out.println(v.getId());
+                         adjacentes.add(v.getId());
                         }
                         v=v.getAdjacente();
                     }
             }
+        return adjacentes;
     }
 
     //mudei o retorno da funçaõ porque preciso de um vetor ordenado por grau para o algoritmo de coloraçao!!
@@ -468,17 +473,72 @@ public class Grafo {
 
     }
 
+
+ /****************************************************************************************************************/
+        /***  A estratégia é buscar o vértice mais profundo no grafo, sempre que possível.
+        //Algoritmo:
+        //Visite v e ache todos os seus vértices adjacentes
+        //Visite w, o primeiro vértice adjacente de v, que ainda não foi visitado
+        //Marque w como visitado e inicie uma busca em profundidade em w
+        //Se todos os vértices de w já foram visitados, retorne ao último elemento de v que ainda tem vértices adjacentes não visitados
+        //Repita o processo até que todos os vértices de v tenham sido visitados ***/
+        /************************************************************************************************************/
+
+
+
+    public void CriaArrayVisitados(Vertice v1){
+        ArrayList<Integer> visitados = new ArrayList<Integer>();
+        visitados.add(v1.getId());
+        BuscaProfundidade(v1,visitados);
+    }
+    /****************************************************************************************************************/
+       //Realiza a busca de profundidade em pré-ordem
+        /************************************************************************************************************/
+
     public void BuscaProfundidade(Vertice v,ArrayList<Integer> visitados){
-        while (v.getAdjacente()!= null){
-            for(Integer visitado: visitados){
-                if (!(visitado==v.getAdjacente().getId())){
-                    visitados.add(v.getAdjacente().getId());
-                    BuscaProfundidade(v.getAdjacente(),visitados);
+       System.out.println(v.getId());
+       ArrayList<Vertice> adjacentes = new ArrayList<Vertice>();
+       adjacentes= Adjacentes(v.getId());
+
+        boolean existe=false;
+        int j=0;
+        
+                
+                for(int i=0;i<visitados.size();i++){
+
+                    if(adjacentes.get(j).getId()== visitados.get(i)){
+                    
+                    existe=true;
+                   
+                    }
+
                 }
+
+           
+            if(!existe){
+             int cont=0;
+             int k=0;
+             adjacentes= Adjacentes(v.getId());
+             visitados.add(v.getId());
+
+                        for(Integer visitado:visitados){
+                            if( adjacentes.get(k).getId()== visitado){
+                            cont=cont+1;
+                            existe=true;
+                            }
+                        }
+
+
+                if(!existe && cont<adjacentes.size() && adjacentes.get(k)!=null){
+                     BuscaProfundidade(adjacentes.get(k),visitados);
+                }
+                 k++;
             }
-        }
+                
+        j++;
         
     }
+
 
     public boolean existeCaminho (Vertice v1, Vertice v2)
     {
