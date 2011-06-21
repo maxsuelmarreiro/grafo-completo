@@ -20,7 +20,7 @@ public class TesteRooke {
         // TODO code application logic here
         int grau=0;
         Grafo g = new Grafo();
- //       g.setOrientado(true);
+//        g.setOrientado(true);
 //        g.insereVertice(1);
 //        g.insereVertice(1);
 //        g.insereVertice(2);
@@ -124,7 +124,8 @@ public class TesteRooke {
           // g.insereAresta(4,5,1);
 
           // g.Coloracao(g);
-           g.CriaArrayVisitados(g.getVertices().get(0));
+          // g.CriaArrayVisitados(g.getVertices().get(0));
+           g.ImprimeMatrizes();
 
     }
 
