@@ -755,12 +755,14 @@ public class Grafo {
     }
 
     public ArrayList<Vertice> Adjacentes(int id_vertice) {
+        //ImprimeAntecessores(id_vertice);
+        //ImprimeSucessores(id_vertice);
+        ArrayList<Vertice> adjacentes = new ArrayList<Vertice>();
 
-        ArrayList<Vertice> adj = new ArrayList<Vertice>();
         for (Vertice v : vertices){
                 if (v.getId() == id_vertice){
                     while(v.getAdjacente() != null){
-                        adj.add(v.getAdjacente());
+                        adjacentes.add(v);
                         v=v.getAdjacente();
                     }
                 }
@@ -770,27 +772,28 @@ public class Grafo {
 
                     while(v.getAdjacente() != null){
                         if (v.getAdjacente().getId() == id_vertice){
-                            adj.add(v);
+                        adjacentes.add(v);
                         }
                         v=v.getAdjacente();
                     }
             }
+        return adjacentes;
 
-        return adj;
     }
 
     public void Coloracao(Grafo gr)
     {
-
-       boolean temCor=true;
+       
+       boolean colorir=true;
 
        gr.vertices=OrdenaGrau(); //ordena os vertices do grafo pelo seu grau, em ordem crescente.
 
        int j = gr.getVertices().size()-1;
 
-       ArrayList<Vertice> adjacentes = new ArrayList<Vertice>();
-
        ArrayList<Vertice>colorido = new ArrayList<Vertice>();//grafo com os vertices em ordem descrescente de grau
+       
+       ArrayList<Vertice> vAdjacentes = new ArrayList<Vertice>();
+
        while(j>=0)
        {
            colorido.add(gr.getVertices().get(j));
@@ -798,39 +801,49 @@ public class Grafo {
        }
 
        //para colorir o grafo, primeiro colorimos o vertice de maior grau
-       colorido.get(0).cor=1;
+       colorido.get(0).setCor(1);
+       //adiciona no vetor de cores
+       int cores[]={1};
+            
+//       Vertice vAtual;
 
-       Vertice vAtual;
-       int corAtual=1;
+       int cor = 1;
 
        //andando nos vertices
-       for(int i=1;i<colorido.size();i++)// PARA V DE 2 ATÉ N
+       for(int vrt=1;vrt<colorido.size();vrt++)// PARA V DE 2 ATÉ N
        {
-           adjacentes = gr.Adjacentes(i);
-           vAtual=colorido.get(i);
-           //PARA K DE 1 ATE C
-           for(int cor=1; cor<=corAtual;cor++) //andando nas cores para ver qual pode ser usada pelo vertice em questao
+           System.out.print("Vertice:"+colorido.get(vrt).getId()+"\n");
+           //System.out.print("Adjacente:"+colorido.get(vrt).getAdjacente().getId()+"\n");
+           vAdjacentes = Adjacentes(colorido.get(vrt).getId());
+           for(int k=1;k<=cor;k++)
            {
-              //anda nos adjacentes ao vertice da posição 'i' e ve a cor dos adjacentes dele
-              for(Vertice adj: adjacentes)
-              {
-                 //se o adjacente de 4 tem cor igual a atual, entao 4 nao pode ter essa cor
-                  if(adj.cor==cor)
-                       temCor=false; break;
-              }
-             if(temCor==true)//o vertice nao tem nenhum adjacente com a corAtual
+               System.out.print("Entrou no for\n");
+               colorir=true;
+               for(Vertice adj: vAdjacentes)
                {
-                  colorido.get(i).cor = cor;
+                   System.out.print("Adjacente"+adj.getId()+"\n");
+                   if(adj.getCor()==k)
+                   {
+                       System.out.print("Já tem vertice com essa cor\n");
+                       colorir=false;break;
+                   }
                }
-          }
-          if(temCor==false) {// a cor do vertice nao pode ser nenhuma das que já tem no vetor, entao tem que colocar uma nova cor
-              corAtual++;
-              colorido.get(i).cor=corAtual;
-            }
+               if(colorir==true)
+               {
+                   System.out.print("Ainda não tem vertice com essa cor\n");
+                   colorido.get(vrt).setCor(k);break;
+               }
+           }
+           if(colorir==false)
+           {
+               cor=cor+1;
+               colorido.get(vrt).setCor(cor);
+           }
        }
 
        for(int x=0;x<colorido.size();x++){
-        System.out.print("Vértice:"+colorido.get(x).getId()+","+"Cor:"+colorido.get(x).cor+"\n");}
+        System.out.print("Vértice:"+colorido.get(x).getId()+","+"Cor:"+colorido.get(x).getCor()+"\n");}
 
     }
+
 }
