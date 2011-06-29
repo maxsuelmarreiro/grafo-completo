@@ -492,58 +492,58 @@ public class Grafo {
 
 
 
-    public void CriaArrayVisitados(Vertice v1){
-        ArrayList<Integer> visitados = new ArrayList<Integer>();
-        visitados.add(v1.getId());
-        BuscaProfundidade(v1,visitados);
-    }
+//    public void CriaArrayVisitados(Vertice v1){
+//        ArrayList<Integer> visitados = new ArrayList<Integer>();
+//        visitados.add(v1.getId());
+//        BuscaProfundidade(v1,visitados);
+//    }
     /****************************************************************************************************************/
        //Realiza a busca de profundidade em pré-ordem
         /************************************************************************************************************/
 
-    public void BuscaProfundidade(Vertice v,ArrayList<Integer> visitados){
-       System.out.println(v.getId());
-       ArrayList<Vertice> adjacentes = new ArrayList<Vertice>();
-       adjacentes= Adjacentes(v.getId());
-
-        boolean existe=false;
-        int j=0;
-        
-                
-                for(int i=0;i<visitados.size();i++){
-
-                    if(adjacentes.get(j).getId()== visitados.get(i)){
-                    
-                    existe=true;
-                   
-                    }
-
-                }
-
-           
-            if(!existe){
-             int cont=0;
-             int k=0;
-             adjacentes= Adjacentes(v.getId());
-             visitados.add(v.getId());
-
-                        for(Integer visitado:visitados){
-                            if( adjacentes.get(k).getId()== visitado){
-                            cont=cont+1;
-                            existe=true;
-                            }
-                        }
-
-
-                if(!existe && cont<adjacentes.size() && adjacentes.get(k)!=null){
-                     BuscaProfundidade(adjacentes.get(k),visitados);
-                }
-                 k++;
-            }
-                
-        j++;
-        
-    }
+//    public void BuscaProfundidade(Vertice v,ArrayList<Integer> visitados){
+//       System.out.println(v.getId());
+//       ArrayList<Vertice> adjacentes = new ArrayList<Vertice>();
+//       adjacentes= Adjacentes(v.getId());
+//
+//        boolean existe=false;
+//        int j=0;
+//
+//
+//                for(int i=0;i<visitados.size();i++){
+//
+//                    if(adjacentes.get(j).getId()== visitados.get(i)){
+//
+//                    existe=true;
+//
+//                    }
+//
+//                }
+//
+//
+//            if(!existe){
+//             int cont=0;
+//             int k=0;
+//             adjacentes= Adjacentes(v.getId());
+//             visitados.add(v.getId());
+//
+//                        for(Integer visitado:visitados){
+//                            if( adjacentes.get(k).getId()== visitado){
+//                            cont=cont+1;
+//                            existe=true;
+//                            }
+//                        }
+//
+//
+//                if(!existe && cont<adjacentes.size() && adjacentes.get(k)!=null){
+//                     BuscaProfundidade(adjacentes.get(k),visitados);
+//                }
+//                 k++;
+//            }
+//
+//        j++;
+//
+//    }
     public void ImprimeMatrizes(){
         System.out.println("Matriz de Incidência:");
         ImprimeMatrizdeIncidencia();
@@ -754,15 +754,18 @@ public class Grafo {
         }
     }
 
-    public ArrayList<Vertice> Adjacentes(int id_vertice) {
+        public ArrayList<Vertice> Adjacentes(int id_vertice) {
         //ImprimeAntecessores(id_vertice);
         //ImprimeSucessores(id_vertice);
         ArrayList<Vertice> adjacentes = new ArrayList<Vertice>();
 
+        Vertice vAtual;
+
         for (Vertice v : vertices){
                 if (v.getId() == id_vertice){
                     while(v.getAdjacente() != null){
-                        adjacentes.add(v);
+                        adjacentes.add(v.getAdjacente());
+                      //  System.out.print(v.getAdjacente().getId()+"\n");
                         v=v.getAdjacente();
                     }
                 }
@@ -770,80 +773,129 @@ public class Grafo {
 
         for (Vertice v : vertices){
 
+            vAtual=v;
                     while(v.getAdjacente() != null){
                         if (v.getAdjacente().getId() == id_vertice){
-                        adjacentes.add(v);
+                        adjacentes.add(vAtual);
+                     //   System.out.print(vAtual.getId()+"\n");
                         }
                         v=v.getAdjacente();
                     }
             }
-        return adjacentes;
+        return adjacentes; //retorno de um vetor com o id dos adjacentes
 
     }
+
+        //retorna vetor com os adjacentes de um determinado vertice
+    public ArrayList<Integer> vetorAdjacentes(int id_vertice) {
+
+        ArrayList<Integer> adjacentes = new ArrayList<Integer>();
+
+        Vertice vAtual;
+
+        for (Vertice v : vertices){
+                if (v.getId() == id_vertice){
+                    while(v.getAdjacente() != null){
+                        adjacentes.add(v.getAdjacente().getId());
+                      //  System.out.print(v.getAdjacente().getId()+"\n");
+                        v=v.getAdjacente();
+                    }
+                }
+            }
+
+        for (Vertice v : vertices){
+
+            vAtual=v;
+                    while(v.getAdjacente() != null){
+                        if (v.getAdjacente().getId() == id_vertice){
+                        adjacentes.add(vAtual.getId());
+                     //   System.out.print(vAtual.getId()+"\n");
+                        }
+                        v=v.getAdjacente();
+                    }
+            }
+        return adjacentes; //retorno de um vetor com o id dos adjacentes
+
+    }
+
+    public ArrayList<Vertice> OrdenaGrauDecrescente(){
+
+        for (int i=vertices.size();i>1;i--){
+            for (int j=1;j<i;j++){
+                if (CalculaGrau(vertices.get(j-1).getId())<CalculaGrau(vertices.get(j).getId())){
+
+                    Collections.swap(vertices, j, j-1);
+                }
+            }
+        }
+
+       return vertices;
+   }
 
     public void Coloracao(Grafo gr)
     {
-       
-       boolean colorir=true;
+        gr.vertices=OrdenaGrauDecrescente();
+        
+        int cores[][] = new int[2][gr.vertices.size()];
 
-       gr.vertices=OrdenaGrau(); //ordena os vertices do grafo pelo seu grau, em ordem crescente.
+        //variavel que indica se podemos ou nao colorir o vertice com certa cor
+        boolean colorir=true;
 
-       int j = gr.getVertices().size()-1;
+        //matriz com vértices e suas respectivas cores
+        for(int lin = 0; lin <=0; lin++){
+            for(int col = 0; col < gr.vertices.size(); col++)
+                cores[lin][col]=gr.vertices.get(col).getId();
+        }
+        
+        cores[1][0]=1; // coloca a cor do primeiro elemento como 1
+        
+        int cor=1;
 
-       ArrayList<Vertice>colorido = new ArrayList<Vertice>();//grafo com os vertices em ordem descrescente de grau
-       
-       ArrayList<Vertice> vAdjacentes = new ArrayList<Vertice>();
+        ArrayList<Integer> vAdjacentes= new ArrayList<Integer>();//lista os adjacentes
 
-       while(j>=0)
-       {
-           colorido.add(gr.getVertices().get(j));
-           j--;
-       }
+        //para cada vertice da matriz, procurar a cor para colori-lo
+        for(int vrt=1; vrt<cores[0].length;vrt++)
+        {
+            //pega os adjacentes do vertice em questao
+          vAdjacentes = vetorAdjacentes(cores[0][vrt]);
+          
+           for(int cAtual=1;cAtual<=cor;cAtual++){
 
-       //para colorir o grafo, primeiro colorimos o vertice de maior grau
-       colorido.get(0).setCor(1);
-       //adiciona no vetor de cores
-       int cores[]={1};
-            
-//       Vertice vAtual;
-
-       int cor = 1;
-
-       //andando nos vertices
-       for(int vrt=1;vrt<colorido.size();vrt++)// PARA V DE 2 ATÉ N
-       {
-           System.out.print("Vertice:"+colorido.get(vrt).getId()+"\n");
-           //System.out.print("Adjacente:"+colorido.get(vrt).getAdjacente().getId()+"\n");
-           vAdjacentes = Adjacentes(colorido.get(vrt).getId());
-           for(int k=1;k<=cor;k++)
-           {
-               System.out.print("Entrou no for\n");
                colorir=true;
-               for(Vertice adj: vAdjacentes)
-               {
-                   System.out.print("Adjacente"+adj.getId()+"\n");
-                   if(adj.getCor()==k)
-                   {
-                       System.out.print("Já tem vertice com essa cor\n");
-                       colorir=false;break;
+
+               for(int adj: vAdjacentes)
+                {
+
+                   //procurar ele na matriz e ver sua cor
+                    for(int i=0;i<cores[0].length;i++)
+                    {
+                        //se achou na matriz
+                        if(cores[0][i]==adj)
+                        {
+                          //ver a cor dele
+                            if(cores[1][i]==cAtual)
+                                colorir=false;break;
+                        }
                    }
                }
-               if(colorir==true)
-               {
-                   System.out.print("Ainda não tem vertice com essa cor\n");
-                   colorido.get(vrt).setCor(k);break;
-               }
-           }
-           if(colorir==false)
-           {
-               cor=cor+1;
-               colorido.get(vrt).setCor(cor);
-           }
-       }
-
-       for(int x=0;x<colorido.size();x++){
-        System.out.print("Vértice:"+colorido.get(x).getId()+","+"Cor:"+colorido.get(x).getCor()+"\n");}
-
+                    if(colorir==true)
+                    {
+                       cores[1][vrt]=cAtual; break;
+                    }
+                }
+            
+            if(colorir==false)
+            {
+                cor++;
+                cores[1][vrt]=cor;
+            }
     }
+
+        for(int col = 0; col < cores[0].length; col++){
+                   System.out.print("Vertice: "+cores[0][col]+"-"+"Cor: "+cores[1][col]+"\n");
+                  
+                }
+          
+ }
 
 }
