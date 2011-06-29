@@ -13,7 +13,7 @@ public class Vertice {
     private Vertice adjacente;
     private int id;
     private int peso;
-    int cor=0;
+    private int cor;
 
     public Vertice getAdjacente() {
         return adjacente;
@@ -39,5 +39,13 @@ public class Vertice {
         this.peso = peso;
     }
 
-    
+    public void setCor(int c)
+    {
+        this.cor=c;
+    }
+
+    public int getCor()
+    {
+        return cor;
+    }
 }
