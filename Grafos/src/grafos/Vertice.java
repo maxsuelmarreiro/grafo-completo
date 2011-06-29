@@ -13,7 +13,7 @@ public class Vertice {
     private Vertice adjacente;
     private int id;
     private int peso;
-    private int cor;
+  
 
     public Vertice getAdjacente() {
         return adjacente;
