@@ -114,15 +114,15 @@ public class TesteRooke {
            g.insereVertice(2);//1
            g.insereVertice(3);//2
            g.insereVertice(4);//3
-           g.insereVertice(5);//4
+          // g.insereVertice(5);//4
 
-           g.insereAresta(1,2,1);
-           g.insereAresta(1,5,1);
-           g.insereAresta(2,3,1);
-           g.insereAresta(2,4,1);
-           g.insereAresta(2,5,1);
-           g.insereAresta(3,4,1);
-           g.insereAresta(4,5,1);
+           g.insereAresta(1, 2, grau);
+           g.insereAresta(1, 3, grau);
+           g.insereAresta(2, 1, grau);
+           g.insereAresta(3, 4, grau);
+           g.insereAresta(4, 3, grau);
+
+           
 
 //           g.insereAresta(1,2,1);
 //           g.insereAresta(2,5,1);
@@ -135,7 +135,8 @@ public class TesteRooke {
            // g.CriaArrayVisitados(g.getVertices().get(0));
          //  g.ImprimeMatrizes();
 
-           g.Coloracao(g);
+          // g.Coloracao(g);
+           g.geraGrafoReduzido(g);
 
     }
 

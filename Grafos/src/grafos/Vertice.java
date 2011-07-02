@@ -38,14 +38,4 @@ public class Vertice {
     public void setPeso(int peso) {
         this.peso = peso;
     }
-
-    public void setCor(int c)
-    {
-        this.cor=c;
-    }
-
-    public int getCor()
-    {
-        return cor;
-    }
 }
