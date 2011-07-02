@@ -492,58 +492,58 @@ public class Grafo {
 
 
 
-//    public void CriaArrayVisitados(Vertice v1){
-//        ArrayList<Integer> visitados = new ArrayList<Integer>();
-//        visitados.add(v1.getId());
-//        BuscaProfundidade(v1,visitados);
-//    }
+    public void CriaArrayVisitados(Vertice v1){
+        ArrayList<Integer> visitados = new ArrayList<Integer>();
+        visitados.add(v1.getId());
+        BuscaProfundidade(v1,visitados);
+    }
     /****************************************************************************************************************/
        //Realiza a busca de profundidade em pré-ordem
         /************************************************************************************************************/
 
-//    public void BuscaProfundidade(Vertice v,ArrayList<Integer> visitados){
-//       System.out.println(v.getId());
-//       ArrayList<Vertice> adjacentes = new ArrayList<Vertice>();
-//       adjacentes= Adjacentes(v.getId());
-//
-//        boolean existe=false;
-//        int j=0;
-//
-//
-//                for(int i=0;i<visitados.size();i++){
-//
-//                    if(adjacentes.get(j).getId()== visitados.get(i)){
-//
-//                    existe=true;
-//
-//                    }
-//
-//                }
-//
-//
-//            if(!existe){
-//             int cont=0;
-//             int k=0;
-//             adjacentes= Adjacentes(v.getId());
-//             visitados.add(v.getId());
-//
-//                        for(Integer visitado:visitados){
-//                            if( adjacentes.get(k).getId()== visitado){
-//                            cont=cont+1;
-//                            existe=true;
-//                            }
-//                        }
-//
-//
-//                if(!existe && cont<adjacentes.size() && adjacentes.get(k)!=null){
-//                     BuscaProfundidade(adjacentes.get(k),visitados);
-//                }
-//                 k++;
-//            }
-//
-//        j++;
-//
-//    }
+    public void BuscaProfundidade(Vertice v,ArrayList<Integer> visitados){
+       System.out.println(v.getId());
+       ArrayList<Vertice> adjacentes = new ArrayList<Vertice>();
+       adjacentes= Adjacentes(v.getId());
+
+        boolean existe=false;
+        int j=0;
+
+
+                for(int i=0;i<visitados.size();i++){
+
+                    if(adjacentes.get(j).getId()== visitados.get(i)){
+
+                    existe=true;
+
+                    }
+
+                }
+
+
+            if(!existe){
+             int cont=0;
+             int k=0;
+             adjacentes= Adjacentes(v.getId());
+             visitados.add(v.getId());
+
+                        for(Integer visitado:visitados){
+                            if( adjacentes.get(k).getId()== visitado){
+                            cont=cont+1;
+                            existe=true;
+                            }
+                        }
+
+
+                if(!existe && cont<adjacentes.size() && adjacentes.get(k)!=null){
+                     BuscaProfundidade(adjacentes.get(k),visitados);
+                }
+                 k++;
+            }
+
+        j++;
+
+    }
     public void ImprimeMatrizes(){
         System.out.println("Matriz de Incidência:");
         ImprimeMatrizdeIncidencia();
@@ -735,6 +735,58 @@ public class Grafo {
                 break;  
             }
         }
+
+
+    }
+
+    public ArrayList<Integer> geraFTD(Vertice vert)
+    {
+        ArrayList<Integer> ftd = new ArrayList<Integer>();
+   
+        boolean atingido=false;
+
+       // System.out.print("ftd("+ vert.getId()+"):");
+        //achar vert na estrutura
+        for(Vertice vt: vertices)
+        {
+            if(vt.getId()==vert.getId())//achei
+            {
+                //procura quem vert atinge
+                for(Vertice vrt: vertices)
+                {
+                    atingido=existeCaminho(vt, vrt);
+
+                    if(atingido==true)//vt é parte do fecho transitivo direto de vert
+                    {
+                        ftd.add(vrt.getId());// System.out.print(vrt.getId() + ", ");
+                    }
+                }
+                break;
+            }
+        }
+        return ftd;
+    }
+
+    public ArrayList<Integer> geraFTI(Vertice vert)
+    {
+        boolean atinge;
+
+       ArrayList<Integer> fti = new ArrayList<Integer>();
+       
+
+       // System.out.print("fti("+vert.getId()+")");
+        //para cada vértice, verifica se ele alcança vert
+        for(Vertice vt: vertices)
+        {
+
+            atinge= existeCaminho(vt, vert);
+            if(atinge==true)// se tem caminho entre vt e vert, imprime vt
+            {
+                fti.add(vt.getId());//System.out.print(vt.getId()+", ");
+            }
+        }
+
+        return fti;
     }
 
     //Imprime todos os vértices que alcança 'vert'
@@ -895,7 +947,69 @@ public class Grafo {
                    System.out.print("Vertice: "+cores[0][col]+"-"+"Cor: "+cores[1][col]+"\n");
                   
                 }
-          
  }
 
+    public void geraGrafoReduzido(Grafo g)
+    {
+       int componentes[][] = new int[2][g.getVertices().size()];//matriz que contem o vertice e seu componente
+
+       ArrayList<Integer> FTD = new ArrayList<Integer>();
+
+       ArrayList<Integer> FTI = new ArrayList<Integer>();
+
+       int q =0; //anda na matriz de componentes
+       int c= 1; // número da componente em que o vértice se encontra
+       boolean reduzir= true;
+       
+
+        for(Vertice vrt: vertices)
+        {
+            reduzir=true;
+
+            //verificar se o vertice já tem componente
+            for(int l=0; l<componentes[0].length;l++)
+            {
+                if(vrt.getId()==componentes[0][l]){//o vertice já tem componente
+                  reduzir=false;
+                    break;//nao precisa mais procurar
+                }
+            }//fim do for de verificar se tá na componente
+
+            if(reduzir==true)
+            {
+                 FTD= g.geraFTD(vrt);
+                 FTI= g.geraFTI(vrt);
+
+                 //inclui o vertice em questao na componente
+                 componentes[0][q]=vrt.getId();
+                 componentes[1][q]=c;
+
+            //verifica a interseção entre os conjuntos
+                for (int i=0; i<FTD.size();i++)
+                {
+                    for (int j=0;j<FTI.size();j++)
+                 {
+                    if (FTD.get(i)==FTI.get(j))
+                    {
+                        componentes[0][q]=FTD.get(i);//vetor com a interseção entre os conjuntos
+                        componentes[1][q]=c;
+                        q++;
+                    }
+                 }//ACHEI A INTERSEÇÃO
+
+                }
+                c++;
+
+            }
+          }
+
+          for(int col=0;col<componentes[0].length;col++){
+              System.out.print("Vertice: "+componentes[0][col]+",Componente"+componentes[1][col]+"\n");
+          }
+  }
+
 }
+
+
+
+
