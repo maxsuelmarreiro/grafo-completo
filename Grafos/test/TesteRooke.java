@@ -133,10 +133,10 @@ public class TesteRooke {
           // g.insereAresta(4,5,1);
 
            // g.CriaArrayVisitados(g.getVertices().get(0));
-         //  g.ImprimeMatrizes();
+           g.ImprimeMatrizes();
 
           // g.Coloracao(g);
-           g.geraGrafoReduzido(g);
+          // g.geraGrafoReduzido(g);
 
     }
 
