@@ -553,54 +553,65 @@ public class Grafo {
     }
 
     public void ImprimeMatrizdeIncidencia(){
-        int [][] matriz = new int [getVertices().size()+1][getArestas().size()+1];
+        String [][] matriz = new String [getVertices().size()+1][getArestas().size()+1];
         if(orientado){
+            matriz[0][0]="X";
              for(int i=0;i<getVertices().size();i++){
-                 matriz[i+1][0]=getVertices().get(i).getId();
+                 matriz[i+1][0]=Integer.toString(getVertices().get(i).getId());
              }
              for(int i=0;i<getArestas().size();i++){
-                 matriz[0][i+1]=getArestas().get(i).getPeso();
+                 matriz[0][i+1]=Integer.toString(getArestas().get(i).getPeso());
 
              }
             for (int i = 0; i < getVertices().size(); i++){
                for (int j = 0; j < getArestas().size(); j++){
-                   if(matriz[i+1][0]==getArestas().get(j).getV1().getId()){
-                     matriz[i+1][j+1]=1;
+                   if(matriz[i+1][0].equals(Integer.toString(getArestas().get(j).getV1().getId()))){
+                     matriz[i+1][j+1]="1";
+                   }
+                   else{
+                        matriz[i+1][j+1]="0";
+                    }
+                 if(matriz[i+1][0].equals(Integer.toString(getArestas().get(j).getV2().getId()))){
+                     matriz[i+1][j+1]="-1";
                  }
-                 if(matriz[i+1][0]==getArestas().get(j).getV2().getId()){
-                     matriz[i+1][j+1]=-1;
-                 }
+                 else{
+                        matriz[i+1][j+1]="0";
+                     }
                }
                
            }
            for (int i = 0; i < getVertices().size()+1; i++){
                for (int j = 0; j < getArestas().size()+1; j++){
-                   System.out.print(matriz[i][j]+" ");
+                   System.out.print(" "+matriz[i][j]+"  ");
                }
                 System.out.println("");
            }
 
         }
         if(!orientado){
+            matriz[0][0]="X";
             for(int i=0;i<getVertices().size();i++){
-                 matriz[i+1][0]=getVertices().get(i).getId();
+                 matriz[i+1][0]=Integer.toString(getVertices().get(i).getId());
              }
              for(int i=0;i<getArestas().size();i++){
-                 matriz[0][i+1]=getArestas().get(i).getPeso();
+                 matriz[0][i+1]=getArestas().get(i).getV1().getId()+"-"+getArestas().get(i).getV2().getId();
 
              }
             for (int i = 0; i < getVertices().size(); i++){
                for (int j = 0; j < getArestas().size(); j++){
-                   if(matriz[i+1][0]==getArestas().get(j).getV1().getId() || matriz[i+1][0]==getArestas().get(j).getV2().getId()){
-                     matriz[i+1][j+1]=1;
+                   if(matriz[i+1][0].equals(Integer.toString(getArestas().get(j).getV1().getId())) || matriz[i+1][0].equals(Integer.toString(getArestas().get(j).getV2().getId()))){
+                     matriz[i+1][j+1]="1";
                  }
+                    else{
+                        matriz[i+1][j+1]="0";
+                    }
                  
                }
 
            }
            for (int i = 0; i < getVertices().size()+1; i++){
                for (int j = 0; j < getArestas().size()+1; j++){
-                   System.out.print(matriz[i][j]+" ");
+                   System.out.print("  "+matriz[i][j]+"   ");
                }
                 System.out.println("");
            }
