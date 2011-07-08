@@ -560,23 +560,24 @@ public class Grafo {
                  matriz[i+1][0]=Integer.toString(getVertices().get(i).getId());
              }
              for(int i=0;i<getArestas().size();i++){
-                 matriz[0][i+1]=Integer.toString(getArestas().get(i).getPeso());
+                 matriz[0][i+1]=getArestas().get(i).getV1().getId()+"-"+getArestas().get(i).getV2().getId();
 
              }
             for (int i = 0; i < getVertices().size(); i++){
                for (int j = 0; j < getArestas().size(); j++){
+                   System.out.println(getArestas().get(j).getV1().getId());
                    if(matriz[i+1][0].equals(Integer.toString(getArestas().get(j).getV1().getId()))){
                      matriz[i+1][j+1]="1";
                    }
                    else{
+                       if(matriz[i+1][0].equals(Integer.toString(getArestas().get(j).getV2().getId()))){
+                        matriz[i+1][j+1]="-1";
+                        }
+                       else{
                         matriz[i+1][j+1]="0";
+                       }
                     }
-                 if(matriz[i+1][0].equals(Integer.toString(getArestas().get(j).getV2().getId()))){
-                     matriz[i+1][j+1]="-1";
-                 }
-                 else{
-                        matriz[i+1][j+1]="0";
-                     }
+                 
                }
                
            }

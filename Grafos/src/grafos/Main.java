@@ -22,32 +22,69 @@ public class Main {
     public static void main(String[] args) {
 
         String linha = null;
-         
+        int grau=0;
+
+        Grafo g = new Grafo();
+        Aresta a = new Aresta();
 
       try {
          FileReader reader = new FileReader("grafo.txt");
          BufferedReader leitor = new BufferedReader(reader);
-         StringTokenizer vert_peso = null;
+         StringTokenizer numero = null;
          StringTokenizer vert = null;
-         ArrayList<String> aresta =new ArrayList<String>();
+         ArrayList<String> numeros =new ArrayList<String>();
 
          while ((linha = leitor.readLine()) != null) {
 
 
-            vert_peso = new StringTokenizer(linha, ": -");
+            numero = new StringTokenizer(linha, ": -");
             
             
-            while (vert_peso.hasMoreTokens()) {
+            while (numero.hasMoreTokens()) {
 
-               aresta.add(vert_peso.nextToken());
-               vert = new StringTokenizer(linha, "-");
+               numeros.add(numero.nextToken());
+               //vert = new StringTokenizer(linha, "-");
             }
             //
 
          }
          leitor.close();
          reader.close();
-         System.out.println(aresta);
+         if(numeros.get(0).equals("0")){
+            // System.out.println("false");
+             g.setOrientado(false);
+         }
+         else{
+             if(numeros.get(0).equals("1")){
+               //  System.out.println("true");
+                 g.setOrientado(true);
+             }
+         }
+         /****************************************************/
+        /*** Faz a inserção dos vértices ***/
+        /****************************************************/
+         for(int i=1;i<(numeros.size());i=i+3){
+             g.insereVertice(Integer.parseInt(numeros.get(i)));
+           //  System.out.println(numeros.get(i));
+         }
+         System.out.println("pares:  ");
+         for(int i=2;i<(numeros.size());i=i+3){
+             g.insereVertice(Integer.parseInt(numeros.get(i)));
+            // System.out.println(numeros.get(i));
+         }
+         /****************************************************/
+        /*** Faz a inserção das arestas***/
+        /****************************************************/
+         for(int i=1;i<(numeros.size());i=i+3){
+
+               g.insereAresta(Integer.parseInt(numeros.get(i)),Integer.parseInt(numeros.get(i+1)),Integer.parseInt(numeros.get(i+2)));
+               //System.out.println(numeros.get(i)+":"+numeros.get(i+1)+"-"+numeros.get(i+2));
+
+
+         }
+
+         g.ImprimeMatrizes();
+        // System.out.println(numeros);
       } catch (Exception e) {
          e.printStackTrace();
       }
