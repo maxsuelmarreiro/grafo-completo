@@ -84,6 +84,8 @@ public class Main {
          }
 
          g.ImprimeMatrizes();
+         //g.ImprimeAdjacentes(5);
+        // g.ImprimeAntecessores(5);
         // System.out.println(numeros);
       } catch (Exception e) {
          e.printStackTrace();
