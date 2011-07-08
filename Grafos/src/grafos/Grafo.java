@@ -323,18 +323,30 @@ public class Grafo {
 
     public ArrayList<Integer> ImprimeAntecessores(int id_vertice) {
         ArrayList<Integer> adjacentes = new ArrayList<Integer>();
+        Vertice vAtual;
         if (orientado) {
-            for (Vertice v : vertices) {
+            for (Vertice v : vertices){
 
-                while (v.getAdjacente() != null) {
-                    if (v.getAdjacente().getId() == id_vertice) {
-                         adjacentes.add(v.getId());
-                       // System.out.println(v.getId());
-                    }
-                    v = v.getAdjacente();
+                vAtual=v;
+                        while(v.getAdjacente() != null){
+                            if (v.getAdjacente().getId() == id_vertice){
+                            adjacentes.add(vAtual.getId());
+                            System.out.print(vAtual.getId()+"\n");
+                            }
+                            v=v.getAdjacente();
+                        }
                 }
-
-            }
+//            for (Vertice v : vertices) {
+//
+//                while (v.getAdjacente() != null) {
+//                    if (v.getAdjacente().getId() == id_vertice) {
+//                         adjacentes.add(v.getId());
+//                         System.out.println(v.getId());
+//                    }
+//                    v = v.getAdjacente();
+//                }
+//
+//            }
         } else {
             System.out.println("Este grafo não é orientado!");
         }
@@ -346,26 +358,37 @@ public class Grafo {
         //ImprimeSucessores(id_vertice);
          ArrayList<Integer> adjacentes = new ArrayList<Integer>();
 
-        for (Vertice v : vertices){
-                if (v.getId() == id_vertice){
-                    while(v.getAdjacente() != null){
-                        //System.out.println(v.getAdjacente().getId());
-                        adjacentes.add(v.getAdjacente().getId());
-                        v=v.getAdjacente();
+         Vertice vAtual;
+
+         if(isOrientado()){
+             adjacentes=ImprimeSucessores(id_vertice);
+         }
+         
+               
+         if(!isOrientado()){
+            for (Vertice v : vertices){
+                    if (v.getId() == id_vertice){
+                        while(v.getAdjacente() != null){
+                            adjacentes.add(v.getAdjacente().getId());
+                            System.out.print(v.getAdjacente().getId()+"\n");
+                            v=v.getAdjacente();
+                        }
                     }
                 }
-            }
 
-        for (Vertice v : vertices){
+            for (Vertice v : vertices){
 
-                    while(v.getAdjacente() != null){
-                        if (v.getAdjacente().getId() == id_vertice){
-                       // System.out.println(v.getId());
-                         adjacentes.add(v.getId());
+                vAtual=v;
+                        while(v.getAdjacente() != null){
+                            if (v.getAdjacente().getId() == id_vertice){
+                            adjacentes.add(vAtual.getId());
+                            System.out.print(vAtual.getId()+"\n");
+                            }
+                            v=v.getAdjacente();
                         }
-                        v=v.getAdjacente();
-                    }
-            }
+                }
+        }
+
         return adjacentes;
     }
 
