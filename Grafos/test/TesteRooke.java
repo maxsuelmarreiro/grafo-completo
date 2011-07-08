@@ -21,18 +21,25 @@ public class TesteRooke {
         int grau=0;
        
         Grafo g = new Grafo();
-//        g.setOrientado(true);
-//        g.insereVertice(1);
+        g.setOrientado(false);
+//     //   g.insereVertice(1);
 //        g.insereVertice(1);
 //        g.insereVertice(2);
-//        g.insereVertice(3);
+//     //   g.insereVertice(3);
 //        g.insereVertice(3);
 //        g.insereVertice(4);
+//
 //
 //        g.insereAresta(2, 1, 3);
 //        g.insereAresta(1, 4, 1);
 //        g.insereAresta(4, 3, 2);
 //        g.insereAresta(3,1, 7);
+
+       // boolean existe=g.existeCaminho(g.getVertices().get(0),g.getVertices().get(1));
+
+       // g.Adjacentes(1);
+
+        //System.out.print(existe);
 
 //        g.insereVertice(1);//0
 //        g.insereVertice(2);//1
@@ -110,11 +117,11 @@ public class TesteRooke {
 //        g.imprimeFTD(g.getVertices().get(6));
 //        g.imprimeFTI(g.getVertices().get(6));
 
-           g.insereVertice(1);//0
-           g.insereVertice(2);//1
-           g.insereVertice(3);//2
-           g.insereVertice(4);//3
-          // g.insereVertice(5);//4
+//           g.insereVertice(1);//0
+//           g.insereVertice(2);//1
+//           g.insereVertice(3);//2
+//           g.insereVertice(4);//3
+//          // g.insereVertice(5);//4
 
            g.insereAresta(1, 2, grau);
            g.insereAresta(1, 3, grau);
@@ -133,10 +140,10 @@ public class TesteRooke {
           // g.insereAresta(4,5,1);
 
            // g.CriaArrayVisitados(g.getVertices().get(0));
-           g.ImprimeMatrizes();
+           //g.ImprimeMatrizes();
 
           // g.Coloracao(g);
-          // g.geraGrafoReduzido(g);
+          g.geraGrafoReduzido(g);
 
     }
 
