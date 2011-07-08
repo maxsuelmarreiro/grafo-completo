@@ -25,6 +25,7 @@ public class Main {
         int grau=0;
 
         Grafo g = new Grafo();
+        Vertice v =new Vertice();
         Aresta a = new Aresta();
 
       try {
@@ -67,7 +68,7 @@ public class Main {
              g.insereVertice(Integer.parseInt(numeros.get(i)));
            //  System.out.println(numeros.get(i));
          }
-         System.out.println("pares:  ");
+         //System.out.println("pares:  ");
          for(int i=2;i<(numeros.size());i=i+3){
              g.insereVertice(Integer.parseInt(numeros.get(i)));
             // System.out.println(numeros.get(i));
@@ -83,9 +84,16 @@ public class Main {
 
          }
 
-         g.ImprimeMatrizes();
+         //g.ImprimeMatrizes();
+         //g.ImprimeGrafo();
          //g.ImprimeAdjacentes(5);
         // g.ImprimeAntecessores(5);
+         System.out.println(g.getVertices().get(1).getId() + "oiii");
+
+         ArrayList<Integer> abc = g.CriaArrayVisitados(g.getVertices().get(1));
+          for (Integer integer : abc) {
+              System.out.println(integer);
+          }
         // System.out.println(numeros);
       } catch (Exception e) {
          e.printStackTrace();
