@@ -88,12 +88,12 @@ public class Main {
          //g.ImprimeGrafo();
          //g.ImprimeAdjacentes(5);
         // g.ImprimeAntecessores(5);
-         System.out.println(g.getVertices().get(1).getId() + "oiii");
-
-         ArrayList<Integer> abc = g.CriaArrayVisitados(g.getVertices().get(1));
-          for (Integer integer : abc) {
-              System.out.println(integer);
-          }
+//         System.out.println(g.getVertices().get(1).getId() + "oiii");
+//
+//         ArrayList<Integer> abc = g.CriaArrayVisitados(g.getVertices().get(1));
+//          for (Integer integer : abc) {
+//              System.out.println(integer);
+//          }
         // System.out.println(numeros);
       } catch (Exception e) {
          e.printStackTrace();
