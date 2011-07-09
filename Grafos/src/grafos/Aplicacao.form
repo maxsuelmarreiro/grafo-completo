@@ -177,6 +177,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="imprimeFTI(v1)"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButton8MouseClicked"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
@@ -196,16 +199,25 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="geraGrafoReduzido()"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButton9MouseClicked"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButton10">
       <Properties>
         <Property name="text" type="java.lang.String" value="imprimeGrafo()"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButton10MouseClicked"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButton11">
       <Properties>
         <Property name="text" type="java.lang.String" value="imprimeMatrizes()"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButton11MouseClicked"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButton12">
       <Properties>
@@ -216,6 +228,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Coloracao()"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButton13MouseClicked"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

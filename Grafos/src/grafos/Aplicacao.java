@@ -10,6 +10,7 @@
  */
 package grafos;
 
+import grafos.Grafo.Global;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
@@ -188,20 +189,45 @@ public class Aplicacao extends javax.swing.JFrame {
         });
 
         jButton8.setText("imprimeFTI(v1)");
+        jButton8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton8MouseClicked(evt);
+            }
+        });
 
         jLabel1.setText("Valor1:");
 
         jLabel2.setText("Valor2:");
 
         jButton9.setText("geraGrafoReduzido()");
+        jButton9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton9MouseClicked(evt);
+            }
+        });
 
         jButton10.setText("imprimeGrafo()");
+        jButton10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton10MouseClicked(evt);
+            }
+        });
 
         jButton11.setText("imprimeMatrizes()");
+        jButton11.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton11MouseClicked(evt);
+            }
+        });
 
         jButton12.setText("Dijkstra(v1)");
 
         jButton13.setText("Coloracao()");
+        jButton13.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton13MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -306,12 +332,25 @@ public class Aplicacao extends javax.swing.JFrame {
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
 
         ArrayList<Vertice> vertices = g.ordenaGrausVertices();
+         ArrayList<Vertice> vertices1 = g.ordenaGrausVerticesEntrada();
+         ArrayList<Vertice> vertices2 = g.ordenaGrausVerticesSaída();
         
         jTextArea1.setText("");
-        for (Vertice vertice : vertices) {
-            jTextArea1.setText(jTextArea1.getText()+"\n"+vertice.getId()+"-"+g.CalculaGrau(vertice.getId()));
+        if(!g.isOrientado()){
+            for (Vertice vertice : vertices) {
+                jTextArea1.setText(jTextArea1.getText()+"\n"+vertice.getId()+"-"+g.CalculaGrau(vertice.getId()));
+            }
         }
-
+     else{
+            jTextArea1.setText(jTextArea1.getText()+"\n"+"Ordenado por Grau de Saída:\n");
+            for (Vertice vertice : vertices2) {
+                jTextArea1.setText(jTextArea1.getText()+"\n"+vertice.getId()+"-"+g.CalculaGrauSaida(vertice.getId()));
+            }
+             jTextArea1.setText(jTextArea1.getText()+"\n"+"Ordenado por Grau de Entrada:\n");
+             for (Vertice vertice : vertices1) {
+                jTextArea1.setText(jTextArea1.getText()+"\n"+vertice.getId()+"-"+g.CalculaGrauEntrada(vertice.getId()));
+            }
+     }
     }//GEN-LAST:event_jButton3MouseClicked
 
     private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
@@ -348,7 +387,7 @@ public class Aplicacao extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         jTextArea1.setText("");
-        g.geraFTD(null);
+       
 
         Vertice v1 = new Vertice();
         v1.setId(Integer.parseInt(jTextField1.getText()));
@@ -361,6 +400,117 @@ public class Aplicacao extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton7MouseClicked
 
+    private void jButton8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton8MouseClicked
+        // TODO add your handling code here:
+        jTextArea1.setText("");
+       
+
+        Vertice v1 = new Vertice();
+        v1.setId(Integer.parseInt(jTextField1.getText()));
+
+
+        ArrayList<Integer> ids = g.geraFTI(v1);
+        for (Integer integer : ids) {
+            jTextArea1.setText(jTextArea1.getText()+"\n"+integer);
+        }
+    }//GEN-LAST:event_jButton8MouseClicked
+
+    private void jButton9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton9MouseClicked
+        // TODO add your handling code here:
+        jTextArea1.setText("");
+        ArrayList<int[]> componentes= new ArrayList<int[]>();
+         componentes = g.geraGrafoReduzido(g);
+
+         for(int valorComponente=1;valorComponente<Global.c;valorComponente++)
+        {
+             jTextArea1.setText(jTextArea1.getText()+"\nComponente"+valorComponente+": ");
+            //System.out.print("\nComponente "+valorComponente+": ");
+             for (int[] ar : componentes) {
+
+                 if(ar[1]==valorComponente)
+                     jTextArea1.setText(jTextArea1.getText()+"\n"+ar[0]+" ");
+                   // System.out.print(ar[0]+" ");
+
+             }
+
+        }
+    }//GEN-LAST:event_jButton9MouseClicked
+
+    private void jButton10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton10MouseClicked
+        // TODO add your handling code here:
+        jTextArea1.setText("");
+
+                if (g.isOrientado()) {
+                jTextArea1.setText(jTextArea1.getText()+"1\n");
+            //System.out.println("1");
+            } else {
+               // System.out.println("0");
+                jTextArea1.setText(jTextArea1.getText()+"0\n");
+            }
+
+        for (Vertice vertice : g.getVertices()) {
+            Vertice v = vertice;
+
+            while (v.getAdjacente() != null) {
+                //System.out.print(vertice.getId());
+                jTextArea1.setText(jTextArea1.getText()+vertice.getId());
+               // System.out.print("-");
+                jTextArea1.setText(jTextArea1.getText()+"-");
+               // System.out.print(v.getAdjacente().getId());
+                jTextArea1.setText(jTextArea1.getText()+v.getAdjacente().getId());
+                //System.out.print(":");
+                jTextArea1.setText(jTextArea1.getText()+":");
+
+                //System.out.println(v.getAdjacente().getPeso());
+                jTextArea1.setText(jTextArea1.getText()+v.getAdjacente().getPeso()+"\n");
+                v = v.getAdjacente();
+
+           }
+
+        }
+    }//GEN-LAST:event_jButton10MouseClicked
+
+    private void jButton11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton11MouseClicked
+        // TODO add your handling code here:
+        jTextArea1.setText("");
+         jTextArea1.setText(jTextArea1.getText()+"Matriz de Incidência:\n");
+        String[][] matrizI = new String[g.getVertices().size() + 1][g.getArestas().size() + 1];
+        matrizI=g.ImprimeMatrizdeIncidencia(g);
+
+        for (int i = 0; i < g.getVertices().size() + 1; i++) {
+                for (int j = 0; j < g.getArestas().size() + 1; j++) {
+                    jTextArea1.setText(jTextArea1.getText()+"  " + matrizI[i][j] + "   ");
+
+                }
+                jTextArea1.setText(jTextArea1.getText()+"\n");
+            }
+         jTextArea1.setText(jTextArea1.getText()+"\n");
+         jTextArea1.setText(jTextArea1.getText()+"Matriz de Adjacência:\n");
+         int[][] matrizA = new int [g.getVertices().size()+1][g.getVertices().size()+1];
+        matrizA=g.ImprimeMatrizdeAdjacencia(g);
+
+        for (int i = 0; i < g.getVertices().size() + 1; i++) {
+                for (int j = 0; j < g.getVertices().size() + 1; j++) {
+                    jTextArea1.setText(jTextArea1.getText()+"  " + matrizA[i][j] + "   ");
+                    //System.out.print(matrizA[i][j] + " ");
+                }
+                jTextArea1.setText(jTextArea1.getText()+"\n");
+            }
+
+    }//GEN-LAST:event_jButton11MouseClicked
+
+    private void jButton13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton13MouseClicked
+        // TODO add your handling code here:
+         jTextArea1.setText("");
+        int cores[][] = new int[2][g.getVertices().size()];
+        cores=g.Coloracao(g);
+            for (int col = 0; col < cores[0].length; col++) {
+                jTextArea1.setText(jTextArea1.getText()+"Vertice: " + cores[0][col] + "-" + "Cor: " + cores[1][col] + "\n");
+
+
+        }
+    }//GEN-LAST:event_jButton13MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -371,7 +521,7 @@ public class Aplicacao extends javax.swing.JFrame {
 
                 try {
                     // Define layout de acordo com o SO que estiver rodando
-                    UIManager.setLookAndFeel(new com.sun.java.swing.plaf.gtk.GTKLookAndFeel());
+                    
                 } catch (Exception e) {
 
                 }
