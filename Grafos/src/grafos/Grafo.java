@@ -4,6 +4,8 @@
  */
 package grafos;
 
+import java.io.File;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -392,6 +394,7 @@ public class Grafo {
                     }
                 }
         }
+        
 
             for (Vertice v : vertices){
 
@@ -404,6 +407,7 @@ public class Grafo {
                             v=v.getAdjacente();
                         }
                 }
+        
         
         return adjacentes;
     }
@@ -1047,7 +1051,6 @@ public class Grafo {
              }
             
         }
-
 
     }
 }
