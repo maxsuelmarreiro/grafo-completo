@@ -19,6 +19,7 @@ public class Grafo {
     private boolean orientado;
     private ArrayList<Aresta> arestas;
 
+
     public Grafo() {
         vertices = new ArrayList<Vertice>();
         arestas = new ArrayList<Aresta>();
@@ -232,7 +233,7 @@ public class Grafo {
 
     }
 
-    public void ImprimeGrafo() {
+    public void ImprimeGrafo(Grafo g) {
         if (orientado) {
             System.out.println("1");
         } else {
@@ -414,26 +415,57 @@ public class Grafo {
 
     public ArrayList<Vertice> ordenaGrausVertices() {
 
-        for (int i = vertices.size(); i > 1; i--) {
-            for (int j = 1; j < i; j++) {
-                if (CalculaGrau(vertices.get(j - 1).getId()) > CalculaGrau(vertices.get(j).getId())) {
+            for (int i = vertices.size(); i > 1; i--) {
+                for (int j = 1; j < i; j++) {
+                    if (CalculaGrau(vertices.get(j - 1).getId()) > CalculaGrau(vertices.get(j).getId())) {
 
-                    Collections.swap(vertices, j, j - 1);
+                        Collections.swap(vertices, j, j - 1);
+                    }
                 }
+
             }
 
-        }
 
         return vertices;
        
     }
+public ArrayList<Vertice> ordenaGrausVerticesSaída() {
+
+            for (int i = vertices.size(); i > 1; i--) {
+                for (int j = 1; j < i; j++) {
+                    if (CalculaGrau(vertices.get(j - 1).getId()) > CalculaGrauSaida(vertices.get(j).getId())) {
+
+                        Collections.swap(vertices, j, j - 1);
+                    }
+                }
+
+            }
 
 
+        return vertices;
+
+    }
+public ArrayList<Vertice> ordenaGrausVerticesEntrada() {
+
+            for (int i = vertices.size(); i > 1; i--) {
+                for (int j = 1; j < i; j++) {
+                    if (CalculaGrau(vertices.get(j - 1).getId()) > CalculaGrauEntrada(vertices.get(j).getId())) {
+
+                        Collections.swap(vertices, j, j - 1);
+                    }
+                }
+
+            }
+
+
+        return vertices;
+
+    }
     //Calcula o grau de um vertice de um grafo não orientado
     public int CalculaGrau(int idV) {
         int grau = 0;
 
-        if(!orientado){
+        
         for (Vertice v : vertices) {
             //procura o vertice de id 'idV' no array de vertices
             if (v.getId() == idV) {
@@ -455,7 +487,7 @@ public class Grafo {
                 v = v.getAdjacente();
             }
         }
-        }
+        
 
         //se for orientado nao tem como calcular o grau
 
@@ -558,17 +590,17 @@ public class Grafo {
 
 
     public void ImprimeMatrizes() {
-        System.out.println("Matriz de Incidência:");
-        ImprimeMatrizdeIncidencia();
-        System.out.println("");
-        System.out.println("Matriz de Adjacência:");
-        ImprimeMatrizdeAdjacencia();
+//        System.out.println("Matriz de Incidência:");
+//        ImprimeMatrizdeIncidencia(this);
+//        System.out.println("");
+//        System.out.println("Matriz de Adjacência:");
+//        ImprimeMatrizdeAdjacencia(this);
     }
 
-    public void ImprimeMatrizdeIncidencia() {
+    public String[][] ImprimeMatrizdeIncidencia(Grafo g) {
         String[][] matriz = new String[getVertices().size() + 1][getArestas().size() + 1];
         if (orientado) {
-            matriz[0][0] = "X";
+            matriz[0][0] = "X  ";
             for (int i = 0; i < getVertices().size(); i++) {
                 matriz[i + 1][0] = Integer.toString(getVertices().get(i).getId());
             }
@@ -579,26 +611,26 @@ public class Grafo {
             for (int i = 0; i < getVertices().size(); i++){
                for (int j = 0; j < getArestas().size(); j++){
                   if(matriz[i+1][0].equals(Integer.toString(getArestas().get(j).getV1().getId()))){
-                     matriz[i+1][j+1]="  1";
+                     matriz[i+1][j+1]="   1 ";
                    }
                    else{
                        if(matriz[i+1][0].equals(Integer.toString(getArestas().get(j).getV2().getId()))){
-                        matriz[i+1][j+1]=" -1";
+                        matriz[i+1][j+1]="  -1 ";
                         }
                        else{
-                        matriz[i+1][j+1]="  0";
+                        matriz[i+1][j+1]="   0 ";
                        }
                     }
 
                 }
 
             }
-            for (int i = 0; i < getVertices().size() + 1; i++) {
-                for (int j = 0; j < getArestas().size() + 1; j++) {
-                    System.out.print(" " + matriz[i][j] + "  ");
-                }
-                System.out.println("");
-            }
+//            for (int i = 0; i < getVertices().size() + 1; i++) {
+//                for (int j = 0; j < getArestas().size() + 1; j++) {
+//                    System.out.print(" " + matriz[i][j] + "  ");
+//                }
+//                System.out.println("");
+//            }
 
         }
         if (!orientado) {
@@ -622,16 +654,17 @@ public class Grafo {
                 }
 
             }
-            for (int i = 0; i < getVertices().size() + 1; i++) {
-                for (int j = 0; j < getArestas().size() + 1; j++) {
-                    System.out.print("  " + matriz[i][j] + "   ");
-                }
-                System.out.println("");
-            }
+//            for (int i = 0; i < getVertices().size() + 1; i++) {
+//                for (int j = 0; j < getArestas().size() + 1; j++) {
+//                    System.out.print("  " + matriz[i][j] + "   ");
+//                }
+//                System.out.println("");
+//            }
         }
+        return matriz;
     }
 
-    public void ImprimeMatrizdeAdjacencia(){
+    public int [][] ImprimeMatrizdeAdjacencia(Grafo g){
          int [][] matriz = new int [getVertices().size()+1][getVertices().size()+1];
          ArrayList<Integer> adjacentes = new ArrayList<Integer>();
           if(orientado){
@@ -649,12 +682,12 @@ public class Grafo {
                  }
                }
            }
-         for (int i = 0; i < getVertices().size()+1; i++){
-               for (int j = 0; j < getVertices().size()+1; j++){
-                   System.out.print(matriz[i][j]+"  ");
-               }
-                System.out.println("");
-            }
+//         for (int i = 0; i < getVertices().size()+1; i++){
+//               for (int j = 0; j < getVertices().size()+1; j++){
+//                   System.out.print(matriz[i][j]+"  ");
+//               }
+//                System.out.println("");
+//            }
         }
         if (!orientado) {
             for (int i = 0; i < getVertices().size(); i++) {
@@ -671,13 +704,14 @@ public class Grafo {
                     }
                 }
             }
-            for (int i = 0; i < getVertices().size() + 1; i++) {
-                for (int j = 0; j < getVertices().size() + 1; j++) {
-                    System.out.print(matriz[i][j] + " ");
-                }
-                System.out.println("");
-            }
+//            for (int i = 0; i < getVertices().size() + 1; i++) {
+//                for (int j = 0; j < getVertices().size() + 1; j++) {
+//                    System.out.print(matriz[i][j] + " ");
+//                }
+//                System.out.println("");
+//            }
         }
+         return matriz;
     }
 
     public boolean existeCaminho(Vertice v1, Vertice v2) {
@@ -985,7 +1019,14 @@ public class Grafo {
         return cores;
     }
 
-    public void geraGrafoReduzido(Grafo g) {
+    public static class Global {
+
+    public static int c;
+
+
+    }
+
+    public  ArrayList<int[]> geraGrafoReduzido(Grafo g) {
 
         ArrayList<int[]> componentes= new ArrayList<int[]>();
 
@@ -994,7 +1035,7 @@ public class Grafo {
         ArrayList<Integer> FTI = new ArrayList<Integer>();
 
         int q = 0; //anda na matriz de componentes
-        int c = 1; // número da componente em que o vértice se encontra
+        Global.c = 1; // número da componente em que o vértice se encontra
         boolean reduzir = true;
 
 
@@ -1016,7 +1057,7 @@ public class Grafo {
                 //inclui o vertice em questao na componente
                 int[] componente = new int[2];
                 componente[0]=vrt.getId();
-                componente[1]=c;
+                componente[1]=Global.c;
                 componentes.add(componente);
 
                 //verifica a interseção entre os conjuntos
@@ -1028,29 +1069,19 @@ public class Grafo {
 
                             int[] novacomponente = new int[2];
                             novacomponente[0]=FTD.get(i);//vetor com a interseção entre os conjuntos
-                            novacomponente[1]=c;
+                            novacomponente[1]=Global.c;
                             componentes.add(novacomponente);
 
                         }
                     }
 
                 }
-                c++;
+                Global.c++;
             }
         }
 
          
-        for(int valorComponente=1;valorComponente<c;valorComponente++)
-        {
-            System.out.print("\nComponente "+valorComponente+": ");
-             for (int[] ar : componentes) {
 
-                 if(ar[1]==valorComponente)
-                    System.out.print(ar[0]+" ");
-             
-             }
-            
-        }
-
+        return componentes;
     }
 }
