@@ -181,7 +181,7 @@ public class Grafo {
 
                         arestas.add(aresta);
                     }
-                    
+
                 }
             }
         }
@@ -253,7 +253,7 @@ public class Grafo {
 
                 v = v.getAdjacente();
 
-           }
+            }
 
         }
     }
@@ -313,7 +313,7 @@ public class Grafo {
         } else {
             System.out.println("Este grafo não é orientado!");
         }
-        
+
     }
 
     public ArrayList<Integer> GeraSucessores(int id_vertice) {
@@ -323,7 +323,7 @@ public class Grafo {
                 if (v.getId() == id_vertice) {
                     while (v.getAdjacente() != null) {
                         adjacentes.add(v.getAdjacente().getId());
-                       v = v.getAdjacente();
+                        v = v.getAdjacente();
                     }
                 }
             }
@@ -337,16 +337,16 @@ public class Grafo {
         ArrayList<Integer> adjacentes = new ArrayList<Integer>();
         Vertice vAtual;
         if (orientado) {
-            for (Vertice v : vertices){
+            for (Vertice v : vertices) {
 
-                vAtual=v;
-                        while(v.getAdjacente() != null){
-                            if (v.getAdjacente().getId() == id_vertice){
-                            adjacentes.add(vAtual.getId());
-                            }
-                            v=v.getAdjacente();
-                        }
+                vAtual = v;
+                while (v.getAdjacente() != null) {
+                    if (v.getAdjacente().getId() == id_vertice) {
+                        adjacentes.add(vAtual.getId());
+                    }
+                    v = v.getAdjacente();
                 }
+            }
         } else {
             System.out.println("Este grafo não é orientado!");
         }
@@ -357,17 +357,17 @@ public class Grafo {
         ArrayList<Integer> adjacentes = new ArrayList<Integer>();
         Vertice vAtual;
         if (orientado) {
-            for (Vertice v : vertices){
+            for (Vertice v : vertices) {
 
-                vAtual=v;
-                        while(v.getAdjacente() != null){
-                            if (v.getAdjacente().getId() == id_vertice){
-                            adjacentes.add(vAtual.getId());
-                            System.out.print(vAtual.getId()+"\n");
-                            }
-                            v=v.getAdjacente();
-                        }
+                vAtual = v;
+                while (v.getAdjacente() != null) {
+                    if (v.getAdjacente().getId() == id_vertice) {
+                        adjacentes.add(vAtual.getId());
+                        System.out.print(vAtual.getId() + "\n");
+                    }
+                    v = v.getAdjacente();
                 }
+            }
         } else {
             System.out.println("Este grafo não é orientado!");
         }
@@ -378,38 +378,38 @@ public class Grafo {
 
         ArrayList<Integer> adjacentes = new ArrayList<Integer>();
 
-         Vertice vAtual;
+        Vertice vAtual;
 
-         if(isOrientado()){
-             adjacentes=GeraSucessores(id_vertice);
-         }
-               
-         if(!isOrientado()){
-            for (Vertice v : vertices){
-                    if (v.getId() == id_vertice){
-                        while(v.getAdjacente() != null){
-                            adjacentes.add(v.getAdjacente().getId());
-                            //System.out.print(v.getAdjacente().getId()+"\n");
-                            v=v.getAdjacente();
-                        }
+        if (isOrientado()) {
+            adjacentes = GeraSucessores(id_vertice);
+        }
+
+        if (!isOrientado()) {
+            for (Vertice v : vertices) {
+                if (v.getId() == id_vertice) {
+                    while (v.getAdjacente() != null) {
+                        adjacentes.add(v.getAdjacente().getId());
+                        //System.out.print(v.getAdjacente().getId()+"\n");
+                        v = v.getAdjacente();
                     }
                 }
+            }
         }
-        
 
-            for (Vertice v : vertices){
 
-                vAtual=v;
-                        while(v.getAdjacente() != null){
-                            if (v.getAdjacente().getId() == id_vertice){
-                            adjacentes.add(vAtual.getId());
-                            //System.out.print(vAtual.getId()+"\n");
-                            }
-                            v=v.getAdjacente();
-                        }
+        for (Vertice v : vertices) {
+
+            vAtual = v;
+            while (v.getAdjacente() != null) {
+                if (v.getAdjacente().getId() == id_vertice) {
+                    adjacentes.add(vAtual.getId());
+                    //System.out.print(vAtual.getId()+"\n");
                 }
-        
-        
+                v = v.getAdjacente();
+            }
+        }
+
+
         return adjacentes;
     }
 
@@ -427,7 +427,7 @@ public class Grafo {
 
 
         return vertices;
-       
+
     }
 public ArrayList<Vertice> ordenaGrausVerticesSaída() {
 
@@ -465,29 +465,29 @@ public ArrayList<Vertice> ordenaGrausVerticesEntrada() {
     public int CalculaGrau(int idV) {
         int grau = 0;
 
-        
-        for (Vertice v : vertices) {
-            //procura o vertice de id 'idV' no array de vertices
-            if (v.getId() == idV) {
-                //conta os vértices que saem dele
-                while (v.getAdjacente() != null) {
+        if (!orientado) {
+            for (Vertice v : vertices) {
+                //procura o vertice de id 'idV' no array de vertices
+                if (v.getId() == idV) {
+                    //conta os vértices que saem dele
+                    while (v.getAdjacente() != null) {
 
-                    grau++;
+                        grau++;
+                        v = v.getAdjacente();
+                    }
+
+                }
+
+                //procura vertice de id 'idV' nos adjacentes de v para contar quantos entram nele
+                while (v.getAdjacente() != null) {
+                    if (v.getAdjacente().getId() == idV)// vert é adjacente
+                    {
+                        grau++;
+                    }
                     v = v.getAdjacente();
                 }
-
-            }
-
-            //procura vertice de id 'idV' nos adjacentes de v para contar quantos entram nele
-            while (v.getAdjacente() != null) {
-                if (v.getAdjacente().getId() == idV)// vert é adjacente
-                {
-                    grau++;
-                }
-                v = v.getAdjacente();
             }
         }
-        
 
         //se for orientado nao tem como calcular o grau
 
@@ -513,7 +513,6 @@ public ArrayList<Vertice> ordenaGrausVerticesEntrada() {
 
         return grau;
     }
-
 
     //Para grafos orientados
     public int CalculaGrauEntrada(int idV) {
@@ -543,14 +542,13 @@ public ArrayList<Vertice> ordenaGrausVerticesEntrada() {
 
         }
 
-        for (Aresta a : arestas){
-            System.out.println("Aresta "+a.getV1().getId()+"-"+a.getV2().getId()+":"+a.getPeso());
-           
+        for (Aresta a : arestas) {
+            System.out.println("Aresta " + a.getV1().getId() + "-" + a.getV2().getId() + ":" + a.getPeso());
+
         }
     }
 
-
-    public ArrayList<Integer> BuscaProfundidade(Vertice v1){
+    public ArrayList<Integer> BuscaProfundidade(Vertice v1) {
         ArrayList<Integer> visitados = new ArrayList<Integer>();
         //visitados.add(v1.getId());
         BuscaProfundidade(v1, visitados);
@@ -560,34 +558,32 @@ public ArrayList<Vertice> ordenaGrausVerticesEntrada() {
     /****************************************************************************************************************/
     //Realiza a busca de profundidade em pré-ordem
     /************************************************************************************************************/
-    
-    public void BuscaProfundidade(Vertice v,ArrayList<Integer> visitados){
-       //System.out.println(v.getId());
-       ArrayList<Vertice> adjacentes = new ArrayList<Vertice>();
-       adjacentes= Adjacentes(v.getId());
+    public void BuscaProfundidade(Vertice v, ArrayList<Integer> visitados) {
+        //System.out.println(v.getId());
+        ArrayList<Vertice> adjacentes = new ArrayList<Vertice>();
+        adjacentes = Adjacentes(v.getId());
 
-       //mrca o v como visitado
-       visitados.add(v.getId());
+        //mrca o v como visitado
+        visitados.add(v.getId());
 
-       //para cada vertice w adjacente a v faça
-       for (Vertice w : adjacentes) {
+        //para cada vertice w adjacente a v faça
+        for (Vertice w : adjacentes) {
 
-           //verificar se o w ja foi visitado
-           boolean visitado = false;
-           for (Integer id : visitados) {
-               if(id == w.getId()){
+            //verificar se o w ja foi visitado
+            boolean visitado = false;
+            for (Integer id : visitados) {
+                if (id == w.getId()) {
                     visitado = true;
-               }
-           }
+                }
+            }
 
-           //se w não foi visitado
-           if(!visitado){
+            //se w não foi visitado
+            if (!visitado) {
                 BuscaProfundidade(w, visitados);
-           }
-     }
+            }
+        }
 
     }
-
 
     public void ImprimeMatrizes() {
 //        System.out.println("Matriz de Incidência:");
@@ -641,14 +637,13 @@ public ArrayList<Vertice> ordenaGrausVerticesEntrada() {
             for (int i = 0; i < getArestas().size(); i++) {
                 matriz[0][i + 1] = getArestas().get(i).getV1().getId() + "-" + getArestas().get(i).getV2().getId();
 
-             }
-            for (int i = 0; i < getVertices().size(); i++){
-               for (int j = 0; j < getArestas().size(); j++){
-                   if(matriz[i+1][0].equals(Integer.toString(getArestas().get(j).getV1().getId())) || matriz[i+1][0].equals(Integer.toString(getArestas().get(j).getV2().getId()))){
-                     matriz[i+1][j+1]="  1";
-                 }
-                    else{
-                        matriz[i+1][j+1]="  0";
+            }
+            for (int i = 0; i < getVertices().size(); i++) {
+                for (int j = 0; j < getArestas().size(); j++) {
+                    if (matriz[i + 1][0].equals(Integer.toString(getArestas().get(j).getV1().getId())) || matriz[i + 1][0].equals(Integer.toString(getArestas().get(j).getV2().getId()))) {
+                        matriz[i + 1][j + 1] = "  1";
+                    } else {
+                        matriz[i + 1][j + 1] = "  0";
                     }
 
                 }
@@ -723,7 +718,7 @@ public ArrayList<Vertice> ordenaGrausVerticesEntrada() {
 
 
         if (orientado) {
-        return retornoOrientado;
+            return retornoOrientado;
         } else {
 
 
@@ -781,32 +776,31 @@ public ArrayList<Vertice> ordenaGrausVerticesEntrada() {
     public void imprimeFTD(Vertice vert) {
         boolean atingido = false;
 
-        if(orientado){
-        System.out.print("ftd(" + vert.getId() + "):");
-        //achar vert na estrutura
-        for (Vertice vt : vertices) {
-            if (vt.getId() == vert.getId())//achei
-            {
-                //procura quem vert atinge
-                for (Vertice vrt : vertices) {
+        if (orientado) {
+            System.out.print("ftd(" + vert.getId() + "):");
+            //achar vert na estrutura
+            for (Vertice vt : vertices) {
+                if (vt.getId() == vert.getId())//achei
+                {
+                    //procura quem vert atinge
+                    for (Vertice vrt : vertices) {
 
-                    atingido = existeCaminho(vt, vrt);
+                        atingido = existeCaminho(vt, vrt);
 
-                    if (atingido == true)//vt é parte do fecho transitivo direto de vert
-                    {
-                        System.out.print(vrt.getId() + ", ");
+                        if (atingido == true)//vt é parte do fecho transitivo direto de vert
+                        {
+                            System.out.print(vrt.getId() + ", ");
+                        }
                     }
+                    break;
                 }
-                break;
             }
-        }
-        }
-        else
+        } else {
             System.out.print("Grafo nao orientado");
+        }
 
 
     }
-
 
     public ArrayList<Integer> geraFTD(Vertice vert) {
         ArrayList<Integer> ftd = new ArrayList<Integer>();
@@ -837,7 +831,7 @@ public ArrayList<Vertice> ordenaGrausVerticesEntrada() {
 
         ArrayList<Integer> fti = new ArrayList<Integer>();
 
-      //para cada vértice, verifica se ele alcança vert
+        //para cada vértice, verifica se ele alcança vert
         for (Vertice vt : vertices) {
 
             atinge = existeCaminho(vt, vert);
@@ -854,59 +848,59 @@ public ArrayList<Vertice> ordenaGrausVerticesEntrada() {
     public void imprimeFTI(Vertice vert) {
         boolean atinge;
 
-        if(orientado){
-        System.out.print("fti(" + vert.getId() + ")");
-        //para cada vértice, verifica se ele alcança vert
-        for (Vertice vt : vertices) {
+        if (orientado) {
+            System.out.print("fti(" + vert.getId() + ")");
+            //para cada vértice, verifica se ele alcança vert
+            for (Vertice vt : vertices) {
 
-            atinge = existeCaminho(vt, vert);
-            if (atinge == true)// se tem caminho entre vt e vert, imprime vt
-            {
-                System.out.print(vt.getId() + ", ");
+                atinge = existeCaminho(vt, vert);
+                if (atinge == true)// se tem caminho entre vt e vert, imprime vt
+                {
+                    System.out.print(vt.getId() + ", ");
+                }
+
             }
-
+        } else {
+            System.out.print("Grafo não é orientado");
         }
-        }
-            else
-                System.out.print("Grafo não é orientado");
     }
 
     public ArrayList<Vertice> Adjacentes(int id_vertice) {
         ArrayList<Vertice> adjacentes = new ArrayList<Vertice>();
 
         Vertice vAtual;
-        if(!isOrientado()){
-                for (Vertice v : vertices){
-                        if (v.getId() == id_vertice){
-                            while(v.getAdjacente() != null){
-                                adjacentes.add(v.getAdjacente());
-                                v=v.getAdjacente();
-                            }
-                        }
+        if (!isOrientado()) {
+            for (Vertice v : vertices) {
+                if (v.getId() == id_vertice) {
+                    while (v.getAdjacente() != null) {
+                        adjacentes.add(v.getAdjacente());
+                        v = v.getAdjacente();
                     }
-
-                for (Vertice v : vertices){
-
-                    vAtual=v;
-                            while(v.getAdjacente() != null){
-                                if (v.getAdjacente().getId() == id_vertice){
-                                adjacentes.add(vAtual);
-                               }
-                                v=v.getAdjacente();
-                            }
-                    }
+                }
             }
-            if(isOrientado()){
-                for (Vertice v : vertices){
-                        if (v.getId() == id_vertice){
-                            while(v.getAdjacente() != null){
-                                adjacentes.add(v.getAdjacente());
-                                v=v.getAdjacente();
-                            }
-                        }
+
+            for (Vertice v : vertices) {
+
+                vAtual = v;
+                while (v.getAdjacente() != null) {
+                    if (v.getAdjacente().getId() == id_vertice) {
+                        adjacentes.add(vAtual);
                     }
+                    v = v.getAdjacente();
+                }
             }
-        
+        }
+        if (isOrientado()) {
+            for (Vertice v : vertices) {
+                if (v.getId() == id_vertice) {
+                    while (v.getAdjacente() != null) {
+                        adjacentes.add(v.getAdjacente());
+                        v = v.getAdjacente();
+                    }
+                }
+            }
+        }
+
         return adjacentes; //retorno de um vetor com o id dos adjacentes
 
     }
@@ -958,7 +952,7 @@ public ArrayList<Vertice> ordenaGrausVerticesEntrada() {
     public int[][] Coloracao(Grafo gr) {
         gr.vertices = OrdenaGrauDecrescente();
 
-       int cores[][] = new int[2][gr.vertices.size()];
+        int cores[][] = new int[2][gr.vertices.size()];
 
         //variavel que indica se podemos ou nao colorir o vertice com certa cor
         boolean colorir = true;
@@ -1043,7 +1037,7 @@ public ArrayList<Vertice> ordenaGrausVerticesEntrada() {
             reduzir = true;
 
             for (int[] componente : componentes) {
-                if(vrt.getId()==componente[0])//ja tem componente
+                if (vrt.getId() == componente[0])//ja tem componente
                 {
                     reduzir = false;
                     break;//nao precisa mais procurar
@@ -1065,7 +1059,7 @@ public ArrayList<Vertice> ordenaGrausVerticesEntrada() {
                     for (int j = 0; j < FTI.size(); j++) {
 
                         //a condição FTD.get(i)!=vrt.getId() é para que o vertice nao seja inserido duas vezes
-                        if (FTD.get(i) == FTI.get(j) && FTD.get(i)!=vrt.getId()) {
+                        if (FTD.get(i) == FTI.get(j) && FTD.get(i) != vrt.getId()) {
 
                             int[] novacomponente = new int[2];
                             novacomponente[0]=FTD.get(i);//vetor com a interseção entre os conjuntos
@@ -1084,4 +1078,189 @@ public ArrayList<Vertice> ordenaGrausVerticesEntrada() {
 
         return componentes;
     }
+
+    public ArrayList<int[]> djikstra(int v0) {
+
+        ArrayList<int[]> distancias = new ArrayList<int[]>();
+        ArrayList<Integer> fechados = new ArrayList<Integer>();
+        ArrayList<Integer> abertos = new ArrayList<Integer>();
+
+        //preenche os abertos com todos os vertices
+        for (Vertice vertice : vertices) {
+            abertos.add(vertice.getId());
+        }
+
+
+        //para cada v  V faça
+        for (Vertice vertice : vertices) {
+            //d[v]  w(v0, v);
+            int[] d = new int[2];
+            d[0] = vertice.getId();
+            d[1] = w(v0, vertice.getId());
+            distancias.add(d);
+        }
+
+        //fechar v0;
+        fechados.add(v0);
+        for (Integer id : abertos) {
+            if (id == v0) {
+                abertos.remove(id);
+                break;
+            }
+        }
+
+        //enquanto existir vértices não fechados que têm uma distância finita de v0 faça
+        boolean existeVerticesNaoFechadosQueTemUmaDistanciaFinitaDeV0 = false;
+        for (Integer integer : abertos) {
+            Vertice vaux = new Vertice();
+            vaux.setId(integer);
+            Vertice novVer = new Vertice();
+            novVer.setId(v0);
+            if (existeCaminho(novVer, vaux)) {
+                existeVerticesNaoFechadosQueTemUmaDistanciaFinitaDeV0 = true;
+                break;
+            }
+        }
+
+        while (existeVerticesNaoFechadosQueTemUmaDistanciaFinitaDeV0) {
+            //v  um dos vértices não fechados cuja distância de v0 é mínima;
+            int verticeCujaDistanciaEMinima = 0;
+            int distanciaMinima = 999999999;
+            for (Integer id : abertos) {
+                //pega a dist do cara do cara
+                for (int[] d : distancias) {
+                    if (d[0] == id) {
+                        if (d[1] < distanciaMinima) {
+                            //magica
+                            distanciaMinima = d[1];
+                            verticeCujaDistanciaEMinima = d[0];
+                        }
+                    }
+                }
+            }
+
+            //fechar verticeCujaDistanciaEMinima;
+            fechados.add(verticeCujaDistanciaEMinima);
+            for (Integer id : abertos) {
+                if (id == verticeCujaDistanciaEMinima) {
+                    abertos.remove(id);
+                    break;
+                }
+            }
+
+            //para cada vértice y  V, não fechado, tal que (v, y)  E faça
+            for (Integer y : abertos) {
+                //pega distancia de y a verticeMinimo
+                int dist = w(verticeCujaDistanciaEMinima, y);
+                if (dist != 999999 && dist != 0) {
+
+                    //d’  d[v] + w(v, y);
+                    int dlinha = 0;
+                    for (int[] d : distancias) {
+                        if (d[0] == verticeCujaDistanciaEMinima) {
+                            dlinha = d[1] + dist;
+                            break;
+                        }
+                    }
+
+                    //dy
+                    int dy = 0;
+                    for (int[] d : distancias) {
+                        if (d[0] == y) {
+                            dy = d[1];
+                        }
+                    }
+
+
+                    //se d’ < d[y] então
+                    if(dlinha < dy){
+
+                        //d[y]  d’;
+                        for (int[] d : distancias) {
+                            if (d[0] == y) {
+                                d[1] = dlinha;
+                                break;
+                            }
+                        }
+
+                    }
+
+                }
+            }
+
+
+            //enquanto existir vértices não fechados que têm uma distância finita de v0 faça
+            existeVerticesNaoFechadosQueTemUmaDistanciaFinitaDeV0 = false;
+            for (Integer integer : abertos) {
+                Vertice vaux = new Vertice();
+                vaux.setId(integer);
+                Vertice novVer = new Vertice();
+                novVer.setId(v0);
+                if (existeCaminho(novVer, vaux)) {
+                    existeVerticesNaoFechadosQueTemUmaDistanciaFinitaDeV0 = true;
+                    break;
+                }
+            }
+
+
+        }
+
+        return distancias;
+    }
+
+    public int w(int v1, int v2) {
+
+        if (v1 != v2) {
+
+            int distancia = 999999;
+
+            for (Aresta aresta : arestas) {
+                if (orientado) {
+                    if (aresta.getV1().getId() == v1 && aresta.getV2().getId() == v2) {
+                        distancia = aresta.getPeso();
+                        break;
+                    }
+                } else {
+                    if ((aresta.getV1().getId() == v1 && aresta.getV2().getId() == v2) || (aresta.getV2().getId() == v1 && aresta.getV1().getId() == v2)) {
+                        distancia = aresta.getPeso();
+                        break;
+                    }
+                }
+            }
+
+            return distancia;
+
+        } else {
+            return 0;
+        }
+
+    }
+//inicio
+//    para cada v  V faça
+//        d[v]  w(v0, v);
+//
+//        p(v)  v0; //v0 é o vértice raiz
+//    fim-para;
+//    fechar v0;
+//    enquanto existir vértices não fechados que têm uma distância finita de v0 faça
+//
+//        v  um dos vértices não fechados cuja distância de v0 é mínima;
+//
+//        feche v;
+//
+//        para cada vértice y  V, não fechado, tal que (v, y)  E faça
+//
+//
+//            d’  d[v] + w(v, y);
+//
+//
+//            se d’ < d[y] então
+//                d[y]  d’;
+//                p(y)  p(v), v;
+//
+//            fim-se;
+//
+//        fim-para;
+//    fim-enquanto;
+//fim.
 }
