@@ -1,12 +1,12 @@
 
 import grafos.Grafo;
+import grafos.Vertice;
 import java.util.ArrayList;
 
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author rooke
@@ -18,10 +18,9 @@ public class TesteRooke {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        int grau=0;
-       
+
         Grafo g = new Grafo();
-        g.setOrientado(false);
+//        g.setOrientado(false);
 //     //   g.insereVertice(1);
 //        g.insereVertice(1);
 //        g.insereVertice(2);
@@ -35,9 +34,9 @@ public class TesteRooke {
 //        g.insereAresta(4, 3, 2);
 //        g.insereAresta(3,1, 7);
 
-       // boolean existe=g.existeCaminho(g.getVertices().get(0),g.getVertices().get(1));
+        // boolean existe=g.existeCaminho(g.getVertices().get(0),g.getVertices().get(1));
 
-       // g.Adjacentes(1);
+        // g.Adjacentes(1);
 
         //System.out.print(existe);
 
@@ -63,7 +62,7 @@ public class TesteRooke {
 
 
 
-        
+
 //        System.out.print("Estou imprimindo o FTD de: " + g.getVertices().get(4).getId()+"\n");
 //        g.imprimeFTD(g.getVertices().get(4));
 //
@@ -75,7 +74,7 @@ public class TesteRooke {
 //        boolean tem6=false;
 //        boolean tem7=false;
 
-        
+
 //        //verificar se tem caminho do 5 para todos
 //       tem1= g.existeCaminho(g.getVertices().get(4),g.getVertices().get(0));
 //       tem2= g.existeCaminho(g.getVertices().get(4),g.getVertices().get(1));
@@ -100,19 +99,19 @@ public class TesteRooke {
         //g.removeAresta(1, 2, 3);
 
         //g.ImprimeGrafo();
-       // g.ImprimeSucessores(1);
-       // g.ImprimeAntecessores(2);
+        // g.ImprimeSucessores(1);
+        // g.ImprimeAntecessores(2);
 
-       // g.ImprimeAdjacentes(1);
-       // g.CalculaGrau(1);
-     
-     
-       // boolean tem = g.existeCaminho(g.getVertices().get(0),g.getVertices().get(2));
-       // System.out.print(tem);
-       //g.ImprimeAdjacentes(4);
+        // g.ImprimeAdjacentes(1);
+        // g.CalculaGrau(1);
 
-      
-     //   System.out.println("oi");
+
+        // boolean tem = g.existeCaminho(g.getVertices().get(0),g.getVertices().get(2));
+        // System.out.print(tem);
+        //g.ImprimeAdjacentes(4);
+
+
+        //   System.out.println("oi");
 
 //        g.imprimeFTD(g.getVertices().get(6));
 //        g.imprimeFTI(g.getVertices().get(6));
@@ -123,28 +122,58 @@ public class TesteRooke {
 //           g.insereVertice(4);//3
 //          // g.insereVertice(5);//4
 
-           g.insereAresta(1, 2, grau);
-           g.insereAresta(1, 3, grau);
-           g.insereAresta(2, 1, grau);
-           g.insereAresta(3, 4, grau);
-           g.insereAresta(4, 3, grau);
 
-           
+        g.setOrientado(false);
+
+        g.insereVertice(1);
+        g.insereVertice(2);
+        g.insereVertice(3);
+        g.insereVertice(4);
+        g.insereVertice(5);
+        g.insereVertice(6);
+        g.insereVertice(7);
+        g.insereVertice(8);
+
+
+        g.insereAresta(1, 2, 3);
+        g.insereAresta(1, 5, 2);
+        g.insereAresta(1, 4, 1);
+        g.insereAresta(2, 3, 5);
+        g.insereAresta(2, 5, 6);
+        g.insereAresta(3, 5, 4);
+        g.insereAresta(3, 6, 4);
+        g.insereAresta(4, 5, 5);
+        g.insereAresta(4, 7, 4);
+        g.insereAresta(5, 7, 3);
+        g.insereAresta(5, 6, 1);
+        g.insereAresta(5, 8, 8);
+        g.insereAresta(6, 8, 5);
+        g.insereAresta(7, 8, 7);
+
+
 
 //           g.insereAresta(1,2,1);
 //           g.insereAresta(2,5,1);
 //           g.insereAresta(5,3,1);
 //           g.insereAresta(3,4,1);
-          // g.insereAresta(2,5,1);
-          // g.insereAresta(3,4,1);
-          // g.insereAresta(4,5,1);
+        // g.insereAresta(2,5,1);
+        // g.insereAresta(3,4,1);
+        // g.insereAresta(4,5,1);
 
-           // g.CriaArrayVisitados(g.getVertices().get(0));
-           //g.ImprimeMatrizes();
+        // g.CriaArrayVisitados(g.getVertices().get(0));
+        //g.ImprimeMatrizes();
 
-          // g.Coloracao(g);
-          g.geraGrafoReduzido(g);
+        // g.Coloracao(g);
+//          g.geraGrafoReduzido(g);
+
+
+        ArrayList<int[]> d = g.djikstra(2);
+
+        for (int[] is : d) {
+            System.out.println(is[0]+"-"+is[1]);
+        }
+
+        System.out.println("oioioioi");
 
     }
-
 }

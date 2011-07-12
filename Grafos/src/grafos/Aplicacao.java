@@ -30,76 +30,75 @@ public class Aplicacao extends javax.swing.JFrame {
         initComponents();
 
         String linha = null;
-        int grau=0;
+        int grau = 0;
 
         g = new Grafo();
-        Vertice v =new Vertice();
+        Vertice v = new Vertice();
         Aresta a = new Aresta();
 
-      try {
-         FileReader reader = new FileReader("grafo.txt");
-         BufferedReader leitor = new BufferedReader(reader);
-         StringTokenizer numero = null;
-         StringTokenizer vert = null;
-         ArrayList<String> numeros =new ArrayList<String>();
+        try {
+            FileReader reader = new FileReader("grafo.txt");
+            BufferedReader leitor = new BufferedReader(reader);
+            StringTokenizer numero = null;
+            StringTokenizer vert = null;
+            ArrayList<String> numeros = new ArrayList<String>();
 
-         while ((linha = leitor.readLine()) != null) {
-
-
-            numero = new StringTokenizer(linha, ": -");
+            while ((linha = leitor.readLine()) != null) {
 
 
-            while (numero.hasMoreTokens()) {
+                numero = new StringTokenizer(linha, ": -");
 
-               numeros.add(numero.nextToken());
-               //vert = new StringTokenizer(linha, "-");
+
+                while (numero.hasMoreTokens()) {
+
+                    numeros.add(numero.nextToken());
+                    //vert = new StringTokenizer(linha, "-");
+                }
+                //
+
             }
-            //
+            leitor.close();
+            reader.close();
+            if (numeros.get(0).equals("0")) {
+                // System.out.println("false");
+                g.setOrientado(false);
+            } else {
+                if (numeros.get(0).equals("1")) {
+                    //  System.out.println("true");
+                    g.setOrientado(true);
+                }
+            }
+            /****************************************************/
+            /*** Faz a inserção dos vértices ***/
+            /****************************************************/
+            for (int i = 1; i < (numeros.size()); i = i + 3) {
+                g.insereVertice(Integer.parseInt(numeros.get(i)));
+                //  System.out.println(numeros.get(i));
+            }
+            //System.out.println("pares:  ");
+            for (int i = 2; i < (numeros.size()); i = i + 3) {
+                g.insereVertice(Integer.parseInt(numeros.get(i)));
+                // System.out.println(numeros.get(i));
+            }
+            /****************************************************/
+            /*** Faz a inserção das arestas***/
+            /****************************************************/
+            for (int i = 1; i < (numeros.size()); i = i + 3) {
 
-         }
-         leitor.close();
-         reader.close();
-         if(numeros.get(0).equals("0")){
-            // System.out.println("false");
-             g.setOrientado(false);
-         }
-         else{
-             if(numeros.get(0).equals("1")){
-               //  System.out.println("true");
-                 g.setOrientado(true);
-             }
-         }
-         /****************************************************/
-        /*** Faz a inserção dos vértices ***/
-        /****************************************************/
-         for(int i=1;i<(numeros.size());i=i+3){
-             g.insereVertice(Integer.parseInt(numeros.get(i)));
-           //  System.out.println(numeros.get(i));
-         }
-         //System.out.println("pares:  ");
-         for(int i=2;i<(numeros.size());i=i+3){
-             g.insereVertice(Integer.parseInt(numeros.get(i)));
-            // System.out.println(numeros.get(i));
-         }
-         /****************************************************/
-        /*** Faz a inserção das arestas***/
-        /****************************************************/
-         for(int i=1;i<(numeros.size());i=i+3){
+                g.insereAresta(Integer.parseInt(numeros.get(i)), Integer.parseInt(numeros.get(i + 1)), Integer.parseInt(numeros.get(i + 2)));
+                //System.out.println(numeros.get(i)+":"+numeros.get(i+1)+"-"+numeros.get(i+2));
 
-               g.insereAresta(Integer.parseInt(numeros.get(i)),Integer.parseInt(numeros.get(i+1)),Integer.parseInt(numeros.get(i+2)));
-               //System.out.println(numeros.get(i)+":"+numeros.get(i+1)+"-"+numeros.get(i+2));
+            }
 
-         }
-
-          System.out.println("oioioioi");
+            System.out.println("oioioioi");
 
 
 
 
 
-      } catch (Exception e) {
-         e.printStackTrace();
-      }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
     }
@@ -228,6 +227,11 @@ public class Aplicacao extends javax.swing.JFrame {
         });
 
         jButton12.setText("Dijkstra(v1)");
+        jButton12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton12ActionPerformed(evt);
+            }
+        });
 
         jButton13.setText("Coloracao()");
         jButton13.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -280,28 +284,28 @@ public class Aplicacao extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton18, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
-                    .addComponent(jButton13, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
-                    .addComponent(jButton12, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
-                    .addComponent(jButton14, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
-                    .addComponent(jButton11, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
-                    .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
-                    .addComponent(jButton9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
-                    .addComponent(jButton8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
-                    .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
-                    .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
-                    .addComponent(jButton15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton16, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
-                    .addComponent(jButton17, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE))
+                    .addComponent(jButton18, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
+                    .addComponent(jButton13, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
+                    .addComponent(jButton12, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
+                    .addComponent(jButton14, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
+                    .addComponent(jButton11, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
+                    .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
+                    .addComponent(jButton9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
+                    .addComponent(jButton8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
+                    .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
+                    .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
+                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
+                    .addComponent(jButton15, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
+                    .addComponent(jButton16, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
+                    .addComponent(jButton17, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 440, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 481, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -331,7 +335,7 @@ public class Aplicacao extends javax.swing.JFrame {
                             .addComponent(jLabel1)
                             .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(27, 27, 27)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 490, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 577, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(19, 19, 19)
                         .addComponent(jButton1)
@@ -394,7 +398,7 @@ public class Aplicacao extends javax.swing.JFrame {
 
         jTextArea1.setText("");
         for (Aresta a : arestas) {
-            jTextArea1.setText(jTextArea1.getText()+"\n"+a.getV1().getId()+"-"+a.getV2().getId()+":"+a.getPeso());
+            jTextArea1.setText(jTextArea1.getText() + "\n" + a.getV1().getId() + "-" + a.getV2().getId() + ":" + a.getPeso());
         }
 
     }//GEN-LAST:event_jButton2MouseClicked
@@ -402,25 +406,24 @@ public class Aplicacao extends javax.swing.JFrame {
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
 
         ArrayList<Vertice> vertices = g.ordenaGrausVertices();
-         ArrayList<Vertice> vertices1 = g.ordenaGrausVerticesEntrada();
-         ArrayList<Vertice> vertices2 = g.ordenaGrausVerticesSaída();
-        
+        ArrayList<Vertice> vertices1 = g.ordenaGrausVerticesEntrada();
+        ArrayList<Vertice> vertices2 = g.ordenaGrausVerticesSaída();
+
         jTextArea1.setText("");
-        if(!g.isOrientado()){
+        if (!g.isOrientado()) {
             for (Vertice vertice : vertices) {
-                jTextArea1.setText(jTextArea1.getText()+"\n"+vertice.getId()+"-"+g.CalculaGrau(vertice.getId()));
+                jTextArea1.setText(jTextArea1.getText() + "\n" + vertice.getId() + "-" + g.CalculaGrau(vertice.getId()));
+            }
+        } else {
+            jTextArea1.setText(jTextArea1.getText() + "\n" + "Ordenado por Grau de Saída:\n");
+            for (Vertice vertice : vertices2) {
+                jTextArea1.setText(jTextArea1.getText() + "\n" + vertice.getId() + "-" + g.CalculaGrauSaida(vertice.getId()));
+            }
+            jTextArea1.setText(jTextArea1.getText() + "\n" + "Ordenado por Grau de Entrada:\n");
+            for (Vertice vertice : vertices1) {
+                jTextArea1.setText(jTextArea1.getText() + "\n" + vertice.getId() + "-" + g.CalculaGrauEntrada(vertice.getId()));
             }
         }
-     else{
-            jTextArea1.setText(jTextArea1.getText()+"\n"+"Ordenado por Grau de Saída:\n");
-            for (Vertice vertice : vertices2) {
-                jTextArea1.setText(jTextArea1.getText()+"\n"+vertice.getId()+"-"+g.CalculaGrauSaida(vertice.getId()));
-            }
-             jTextArea1.setText(jTextArea1.getText()+"\n"+"Ordenado por Grau de Entrada:\n");
-             for (Vertice vertice : vertices1) {
-                jTextArea1.setText(jTextArea1.getText()+"\n"+vertice.getId()+"-"+g.CalculaGrauEntrada(vertice.getId()));
-            }
-     }
     }//GEN-LAST:event_jButton3MouseClicked
 
     private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
@@ -428,7 +431,7 @@ public class Aplicacao extends javax.swing.JFrame {
         jTextArea1.setText("");
         ArrayList<Integer> ids = g.ImprimeAdjacentes(Integer.parseInt(jTextField1.getText()));
         for (Integer integer : ids) {
-            jTextArea1.setText(jTextArea1.getText()+"\n"+integer);
+            jTextArea1.setText(jTextArea1.getText() + "\n" + integer);
         }
 
 
@@ -439,7 +442,7 @@ public class Aplicacao extends javax.swing.JFrame {
         jTextArea1.setText("");
         ArrayList<Integer> ids = g.GeraSucessores(Integer.parseInt(jTextField1.getText()));
         for (Integer integer : ids) {
-            jTextArea1.setText(jTextArea1.getText()+"\n"+integer);
+            jTextArea1.setText(jTextArea1.getText() + "\n" + integer);
         }
     }//GEN-LAST:event_jButton5MouseClicked
 
@@ -448,7 +451,7 @@ public class Aplicacao extends javax.swing.JFrame {
         jTextArea1.setText("");
         ArrayList<Integer> ids = g.GeraAntecessores(Integer.parseInt(jTextField1.getText()));
         for (Integer integer : ids) {
-            jTextArea1.setText(jTextArea1.getText()+"\n"+integer);
+            jTextArea1.setText(jTextArea1.getText() + "\n" + integer);
         }
 
     }//GEN-LAST:event_jButton6MouseClicked
@@ -457,7 +460,7 @@ public class Aplicacao extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         jTextArea1.setText("");
-       
+
 
         Vertice v1 = new Vertice();
         v1.setId(Integer.parseInt(jTextField1.getText()));
@@ -465,7 +468,7 @@ public class Aplicacao extends javax.swing.JFrame {
 
         ArrayList<Integer> ids = g.geraFTD(v1);
         for (Integer integer : ids) {
-            jTextArea1.setText(jTextArea1.getText()+"\n"+integer);
+            jTextArea1.setText(jTextArea1.getText() + "\n" + integer);
         }
 
     }//GEN-LAST:event_jButton7MouseClicked
@@ -473,7 +476,7 @@ public class Aplicacao extends javax.swing.JFrame {
     private void jButton8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton8MouseClicked
         // TODO add your handling code here:
         jTextArea1.setText("");
-       
+
 
         Vertice v1 = new Vertice();
         v1.setId(Integer.parseInt(jTextField1.getText()));
@@ -481,27 +484,27 @@ public class Aplicacao extends javax.swing.JFrame {
 
         ArrayList<Integer> ids = g.geraFTI(v1);
         for (Integer integer : ids) {
-            jTextArea1.setText(jTextArea1.getText()+"\n"+integer);
+            jTextArea1.setText(jTextArea1.getText() + "\n" + integer);
         }
     }//GEN-LAST:event_jButton8MouseClicked
 
     private void jButton9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton9MouseClicked
         // TODO add your handling code here:
         jTextArea1.setText("");
-        ArrayList<int[]> componentes= new ArrayList<int[]>();
-         componentes = g.geraGrafoReduzido(g);
+        ArrayList<int[]> componentes = new ArrayList<int[]>();
+        componentes = g.geraGrafoReduzido(g);
 
-         for(int valorComponente=1;valorComponente<Global.c;valorComponente++)
-        {
-             jTextArea1.setText(jTextArea1.getText()+"\nComponente"+valorComponente+": ");
+        for (int valorComponente = 1; valorComponente < Global.c; valorComponente++) {
+            jTextArea1.setText(jTextArea1.getText() + "\nComponente" + valorComponente + ": ");
             //System.out.print("\nComponente "+valorComponente+": ");
-             for (int[] ar : componentes) {
+            for (int[] ar : componentes) {
 
-                 if(ar[1]==valorComponente)
-                     jTextArea1.setText(jTextArea1.getText()+"\n"+ar[0]+" ");
-                   // System.out.print(ar[0]+" ");
+                if (ar[1] == valorComponente) {
+                    jTextArea1.setText(jTextArea1.getText() + "\n" + ar[0] + " ");
+                }
+                // System.out.print(ar[0]+" ");
 
-             }
+            }
 
         }
     }//GEN-LAST:event_jButton9MouseClicked
@@ -510,32 +513,32 @@ public class Aplicacao extends javax.swing.JFrame {
         // TODO add your handling code here:
         jTextArea1.setText("");
 
-                if (g.isOrientado()) {
-                jTextArea1.setText(jTextArea1.getText()+"1\n");
+        if (g.isOrientado()) {
+            jTextArea1.setText(jTextArea1.getText() + "1\n");
             //System.out.println("1");
-            } else {
-               // System.out.println("0");
-                jTextArea1.setText(jTextArea1.getText()+"0\n");
-            }
+        } else {
+            // System.out.println("0");
+            jTextArea1.setText(jTextArea1.getText() + "0\n");
+        }
 
         for (Vertice vertice : g.getVertices()) {
             Vertice v = vertice;
 
             while (v.getAdjacente() != null) {
                 //System.out.print(vertice.getId());
-                jTextArea1.setText(jTextArea1.getText()+vertice.getId());
-               // System.out.print("-");
-                jTextArea1.setText(jTextArea1.getText()+"-");
-               // System.out.print(v.getAdjacente().getId());
-                jTextArea1.setText(jTextArea1.getText()+v.getAdjacente().getId());
+                jTextArea1.setText(jTextArea1.getText() + vertice.getId());
+                // System.out.print("-");
+                jTextArea1.setText(jTextArea1.getText() + "-");
+                // System.out.print(v.getAdjacente().getId());
+                jTextArea1.setText(jTextArea1.getText() + v.getAdjacente().getId());
                 //System.out.print(":");
-                jTextArea1.setText(jTextArea1.getText()+":");
+                jTextArea1.setText(jTextArea1.getText() + ":");
 
                 //System.out.println(v.getAdjacente().getPeso());
-                jTextArea1.setText(jTextArea1.getText()+v.getAdjacente().getPeso()+"\n");
+                jTextArea1.setText(jTextArea1.getText() + v.getAdjacente().getPeso() + "\n");
                 v = v.getAdjacente();
 
-           }
+            }
 
         }
     }//GEN-LAST:event_jButton10MouseClicked
@@ -543,39 +546,39 @@ public class Aplicacao extends javax.swing.JFrame {
     private void jButton11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton11MouseClicked
         // TODO add your handling code here:
         jTextArea1.setText("");
-         jTextArea1.setText(jTextArea1.getText()+"Matriz de Incidência:\n");
+        jTextArea1.setText(jTextArea1.getText() + "Matriz de Incidência:\n");
         String[][] matrizI = new String[g.getVertices().size() + 1][g.getArestas().size() + 1];
-        matrizI=g.ImprimeMatrizdeIncidencia(g);
+        matrizI = g.ImprimeMatrizdeIncidencia(g);
 
         for (int i = 0; i < g.getVertices().size() + 1; i++) {
-                for (int j = 0; j < g.getArestas().size() + 1; j++) {
-                    jTextArea1.setText(jTextArea1.getText()+"  " + matrizI[i][j] + "   ");
+            for (int j = 0; j < g.getArestas().size() + 1; j++) {
+                jTextArea1.setText(jTextArea1.getText() + "  " + matrizI[i][j] + "   ");
 
-                }
-                jTextArea1.setText(jTextArea1.getText()+"\n");
             }
-         jTextArea1.setText(jTextArea1.getText()+"\n");
-         jTextArea1.setText(jTextArea1.getText()+"Matriz de Adjacência:\n");
-         int[][] matrizA = new int [g.getVertices().size()+1][g.getVertices().size()+1];
-        matrizA=g.ImprimeMatrizdeAdjacencia(g);
+            jTextArea1.setText(jTextArea1.getText() + "\n");
+        }
+        jTextArea1.setText(jTextArea1.getText() + "\n");
+        jTextArea1.setText(jTextArea1.getText() + "Matriz de Adjacência:\n");
+        int[][] matrizA = new int[g.getVertices().size() + 1][g.getVertices().size() + 1];
+        matrizA = g.ImprimeMatrizdeAdjacencia(g);
 
         for (int i = 0; i < g.getVertices().size() + 1; i++) {
-                for (int j = 0; j < g.getVertices().size() + 1; j++) {
-                    jTextArea1.setText(jTextArea1.getText()+"  " + matrizA[i][j] + "   ");
-                    //System.out.print(matrizA[i][j] + " ");
-                }
-                jTextArea1.setText(jTextArea1.getText()+"\n");
+            for (int j = 0; j < g.getVertices().size() + 1; j++) {
+                jTextArea1.setText(jTextArea1.getText() + "  " + matrizA[i][j] + "   ");
+                //System.out.print(matrizA[i][j] + " ");
             }
+            jTextArea1.setText(jTextArea1.getText() + "\n");
+        }
 
     }//GEN-LAST:event_jButton11MouseClicked
 
     private void jButton13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton13MouseClicked
         // TODO add your handling code here:
-         jTextArea1.setText("");
+        jTextArea1.setText("");
         int cores[][] = new int[2][g.getVertices().size()];
-        cores=g.Coloracao(g);
-            for (int col = 0; col < cores[0].length; col++) {
-                jTextArea1.setText(jTextArea1.getText()+"Vertice: " + cores[0][col] + "-" + "Cor: " + cores[1][col] + "\n");
+        cores = g.Coloracao(g);
+        for (int col = 0; col < cores[0].length; col++) {
+            jTextArea1.setText(jTextArea1.getText() + "Vertice: " + cores[0][col] + "-" + "Cor: " + cores[1][col] + "\n");
 
 
         }
@@ -583,67 +586,133 @@ public class Aplicacao extends javax.swing.JFrame {
 
     private void jButton18MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton18MouseClicked
         // TODO add your handling code here:
-         jTextArea1.setText("");
-       int v=Integer.parseInt(jTextField1.getText());
+        jTextArea1.setText("");
+        int v = Integer.parseInt(jTextField1.getText());
         g.insereVertice(v);
         ArrayList<Vertice> vertices = new ArrayList<Vertice>();
-        vertices= g.getVertices();
+        vertices = g.getVertices();
         for (Vertice vertice : vertices) {
-            jTextArea1.setText(jTextArea1.getText()+ vertice.getId()+"\n");
+            jTextArea1.setText(jTextArea1.getText() + vertice.getId() + "\n");
         }
     }//GEN-LAST:event_jButton18MouseClicked
 
     private void jButton17MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton17MouseClicked
         // TODO add your handling code here:
-         jTextArea1.setText("");
-        int v=Integer.parseInt(jTextField1.getText());
+        jTextArea1.setText("");
+        int v = Integer.parseInt(jTextField1.getText());
         g.removeVertice(v);
         ArrayList<Vertice> vertices = new ArrayList<Vertice>();
-        vertices= g.getVertices();
+        vertices = g.getVertices();
         for (Vertice vertice : vertices) {
-            jTextArea1.setText(jTextArea1.getText()+ vertice.getId()+"\n");
+            jTextArea1.setText(jTextArea1.getText() + vertice.getId() + "\n");
         }
     }//GEN-LAST:event_jButton17MouseClicked
 
     private void jButton16MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton16MouseClicked
         // TODO add your handling code here:
         jTextArea1.setText("");
-        int v1=Integer.parseInt(jTextField1.getText());
-        int v2=Integer.parseInt(jTextField2.getText());
-        int p=Integer.parseInt(jTextField3.getText());
+        int v1 = Integer.parseInt(jTextField1.getText());
+        int v2 = Integer.parseInt(jTextField2.getText());
+        int p = Integer.parseInt(jTextField3.getText());
         g.insereAresta(v1, v2, p);
         ArrayList<Aresta> arestas = new ArrayList<Aresta>();
-        arestas= g.getArestas();
+        arestas = g.getArestas();
         for (Aresta aresta : arestas) {
-            jTextArea1.setText(jTextArea1.getText()+aresta.getV1().getId()+"-"+aresta.getV2().getId()+":"+aresta.getV2().getPeso()+"\n");
+            jTextArea1.setText(jTextArea1.getText() + aresta.getV1().getId() + "-" + aresta.getV2().getId() + ":" + aresta.getV2().getPeso() + "\n");
         }
     }//GEN-LAST:event_jButton16MouseClicked
 
     private void jButton15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton15MouseClicked
         // TODO add your handling code here:
         jTextArea1.setText("");
-        int v1=Integer.parseInt(jTextField1.getText());
-        int v2=Integer.parseInt(jTextField2.getText());
-        int p=Integer.parseInt(jTextField3.getText());
+        int v1 = Integer.parseInt(jTextField1.getText());
+        int v2 = Integer.parseInt(jTextField2.getText());
+        int p = Integer.parseInt(jTextField3.getText());
         g.removeAresta(v1, v2, p);
         ArrayList<Aresta> arestas = new ArrayList<Aresta>();
-        arestas= g.getArestas();
+        arestas = g.getArestas();
         for (Aresta aresta : arestas) {
-            jTextArea1.setText(jTextArea1.getText()+aresta.getV1().getId()+"-"+aresta.getV2().getId()+":"+aresta.getV2().getPeso()+"\n");
+            jTextArea1.setText(jTextArea1.getText() + aresta.getV1().getId() + "-" + aresta.getV2().getId() + ":" + aresta.getV2().getPeso() + "\n");
         }
 
     }//GEN-LAST:event_jButton15MouseClicked
 
     private void jButton14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton14MouseClicked
         // TODO add your handling code here:
-         jTextArea1.setText("");
-       ArrayList<Integer> visitados = new ArrayList<Integer>();
-       visitados = g.BuscaProfundidade(g.getVertices().get(0));
+        jTextArea1.setText("");
+        ArrayList<Integer> visitados = new ArrayList<Integer>();
+        visitados = g.BuscaProfundidade(g.getVertices().get(0));
         for (int visitado : visitados) {
-            jTextArea1.setText(jTextArea1.getText()+ visitado+"\n");
+            jTextArea1.setText(jTextArea1.getText() + visitado + "\n");
         }
 
     }//GEN-LAST:event_jButton14MouseClicked
+
+    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+        // TODO add your handling code here:
+
+        jTextArea1.setText("");
+
+        //imprime a matriz de menores distancias
+        if (jTextField1.getText().equals("")) {
+
+            for (Vertice ver : g.getVertices()) {
+
+                ArrayList<int[]> d = g.djikstra(ver.getId());
+
+                for(int[] is : d){
+
+                    int tamanho = Integer.toString(is[1]).length();
+
+                    if(tamanho == 1){
+                        jTextArea1.setText(jTextArea1.getText() + "00000" + is[1] + "  ");
+                    }else if(tamanho == 2){
+                        jTextArea1.setText(jTextArea1.getText() + "0000" + is[1] + "  ");
+                    }else if(tamanho == 3){
+                        jTextArea1.setText(jTextArea1.getText() + "000" + is[1] + "  ");
+                    }else if(tamanho == 4){
+                        jTextArea1.setText(jTextArea1.getText() + "00" + is[1] + "  ");
+                    }else{
+                        jTextArea1.setText(jTextArea1.getText() + "" + is[1] + "  ");
+                    }
+
+                }
+
+                jTextArea1.setText(jTextArea1.getText() + "\n");
+
+
+
+            }
+
+
+
+
+        } else {
+            int v1 = Integer.parseInt(jTextField1.getText());
+
+            ArrayList<int[]> d = g.djikstra(v1);
+
+                for(int[] is : d){
+
+                    int tamanho = Integer.toString(is[1]).length();
+
+                    if(tamanho == 1){
+                        jTextArea1.setText(jTextArea1.getText() + "00000" + is[1] + "  ");
+                    }else if(tamanho == 2){
+                        jTextArea1.setText(jTextArea1.getText() + "0000" + is[1] + "  ");
+                    }else if(tamanho == 3){
+                        jTextArea1.setText(jTextArea1.getText() + "000" + is[1] + "  ");
+                    }else if(tamanho == 4){
+                        jTextArea1.setText(jTextArea1.getText() + "00" + is[1] + "  ");
+                    }else{
+                        jTextArea1.setText(jTextArea1.getText() + "" + is[1] + "  ");
+                    }
+
+                }
+        }
+
+
+    }//GEN-LAST:event_jButton12ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -655,9 +724,7 @@ public class Aplicacao extends javax.swing.JFrame {
 
                 try {
                     // Define layout de acordo com o SO que estiver rodando
-                    
                 } catch (Exception e) {
-
                 }
 
                 //new Aplicacao().setVisible(true);
