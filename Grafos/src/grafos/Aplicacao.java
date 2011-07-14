@@ -246,6 +246,11 @@ public class Aplicacao extends javax.swing.JFrame {
                 jButton14MouseClicked(evt);
             }
         });
+        jButton14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton14ActionPerformed(evt);
+            }
+        });
 
         jButton15.setText("removeAresta(v1,v2,peso)");
         jButton15.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -641,7 +646,12 @@ public class Aplicacao extends javax.swing.JFrame {
         // TODO add your handling code here:
         jTextArea1.setText("");
         ArrayList<Integer> visitados = new ArrayList<Integer>();
-        visitados = g.BuscaProfundidade(g.getVertices().get(0));
+
+        int v1 = Integer.parseInt(jTextField1.getText());
+        Vertice ve = new Vertice();
+        ve.setId(v1);
+
+        visitados = g.BuscaProfundidade(ve);
         for (int visitado : visitados) {
             jTextArea1.setText(jTextArea1.getText() + visitado + "\n");
         }
@@ -713,6 +723,10 @@ public class Aplicacao extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_jButton12ActionPerformed
+
+    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton14ActionPerformed
 
     /**
      * @param args the command line arguments
